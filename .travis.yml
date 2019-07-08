@@ -13,7 +13,10 @@ repos:
   ropensci: http://packages.ropensci.org
 
 r_packages:
-  - covr ggplot faraway
+  - covr
+  - ggplot
+  - faraway
+  - pander
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
