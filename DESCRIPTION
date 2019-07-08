@@ -1,18 +1,24 @@
 Package: appregr
-Title: What the Package Does (One Line, Title Case)
+Title: Demonstrates Regression Workflow and Diagnostics
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Bruce",
+           family = "Campbell",
            role = c("aut", "cre"),
-           email = "first.last@example.com")
-Description: What the package does (one paragraph).
+           email = "bruce@aloidia.solutions")
+Description: Wrapper code for regression diagnostics.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
     MASS,
     covr,
-    testthat
+    testthat,
+    knitr,
+    ggplot,
+    pander,
+    faraway,
+    rmarkdown
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr
