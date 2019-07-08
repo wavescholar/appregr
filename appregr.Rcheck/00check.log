@@ -23,6 +23,7 @@ structure’ in the ‘Writing R Extensions’ manual.
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
+* checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... NOTE
 Non-standard files/directories found at top level:
@@ -38,16 +39,34 @@ Non-standard files/directories found at top level:
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
-* checking dependencies in R code ... OK
+* checking dependencies in R code ... NOTE
+'library' or 'require' call to ‘faraway’ in package code.
+  Please use :: or requireNamespace() instead.
+  See section 'Suggested packages' in the 'Writing R Extensions' manual.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... OK
+* checking R code for possible problems ... NOTE
+getmodel: no visible binding for global variable ‘x’
+getmodel: no visible global function definition for ‘data’
+getmodel: no visible binding for global variable ‘prostate’
+getmodel: no visible global function definition for ‘lm’
+Undefined global functions or variables:
+  data lm prostate x
+Consider adding
+  importFrom("stats", "lm")
+  importFrom("utils", "data")
+to your NAMESPACE file.
+
+Found the following calls to data() loading into the global environment:
+File ‘appregr/R/modelfactory.R’:
+  data(prostate, package = "faraway")
+See section ‘Good practice’ in ‘?data’.
 * checking for missing documentation entries ... WARNING
 Undocumented code objects:
-  ‘x’ ‘y’
+  ‘mtcars’ ‘x’ ‘y’
 Undocumented data sets:
-  ‘x’ ‘y’
+  ‘mtcars’ ‘x’ ‘y’
 All user-level objects in a package should have documentation entries.
 See chapter ‘Writing R documentation files’ in the ‘Writing R
 Extensions’ manual.
@@ -55,10 +74,15 @@ Extensions’ manual.
 * checking data for non-ASCII characters ... OK
 * checking data for ASCII and uncompressed saves ... WARNING
   Warning: package needs dependence on R (>= 2.10)
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
 * checking examples ... NONE
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... OK
   Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 WARNINGs, 2 NOTEs
+Status: 2 WARNINGs, 4 NOTEs

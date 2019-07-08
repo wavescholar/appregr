@@ -85,7 +85,7 @@ texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></home/travis/te
 xlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/travis/texlive/texm
 f-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb>
-Output written on Rd2.pdf (1 page, 46403 bytes).
+Output written on Rd2.pdf (1 page, 47544 bytes).
 Transcript written on Rd2.log.
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex)
  restricted \write18 enabled.
@@ -166,8 +166,8 @@ is/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></hom
 e/travis/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/travis/t
 exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/texmf-
 dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on Rd2.pdf (1 page, 46403 bytes).
+Output written on Rd2.pdf (1 page, 47544 bytes).
 Transcript written on Rd2.log.
 Saving output to ‘appregr-manual.pdf’ ...
 Done
-You may want to clean up by 'rm -Rf /tmp/RtmpID34ue/Rd2pdf3a19e082018'
+You may want to clean up by 'rm -Rf /tmp/Rtmp9sSinG/Rd2pdf626b3beacf43'

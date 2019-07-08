@@ -20,12 +20,24 @@ Type 'q()' to quit R.
 > #library(codecov.R)
 > test_check("appregr")
 [1] 6
+$key
+[1] "prostate"
+
+$val
+[1] "The prostate data frame has 97 rows and 9 columns. A study on 97 men with prostate cancer who were due to receive a radical prostatectomy."
+
+$key
+[1] "count-data"
+
+$val
+[1] "Synthetic Count Data."
+
 ══ testthat results  ═══════════════════════════════════════════════════════════
-OK: 2 SKIPPED: 0 WARNINGS: 0 FAILED: 0
+OK: 3 SKIPPED: 0 WARNINGS: 0 FAILED: 0
 > 
 > #test package
 > #test_check('codecov.R')
 > 
 > proc.time()
    user  system elapsed 
-  0.336   0.036   0.370 
+  0.296   0.028   0.322 
