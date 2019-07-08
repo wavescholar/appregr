@@ -7,17 +7,17 @@ before_install:
   - sudo apt-get install jags
   - sudo apt-get install r-cran-rjags
 
-  
+
 repos:
   CRAN: https://cloud.r-project.org
   ropensci: http://packages.ropensci.org
 
 r_packages:
-  - covr
+  - covr ggplot faraway
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
- 
+
 deploy:
   provider: pages
   skip_cleanup: true
@@ -25,3 +25,6 @@ deploy:
   keep_history: true
   on:
     branch: master
+
+notifications:
+  slack: aloidiasolutions:wK07bxfNlwQ5Biau7Brvh9O1
