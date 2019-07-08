@@ -14,7 +14,7 @@ repos:
 
 r_packages:
   - covr
-  - ggplot
+  - ggplot2
   - faraway
   - pander
 
