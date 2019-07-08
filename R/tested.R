@@ -11,7 +11,7 @@ tested <- function(x) {
 
     ## do something with numbers
     if (is.numeric(x)) {
-
+        print(x)
         return(x)
 
     } else {
