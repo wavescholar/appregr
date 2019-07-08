@@ -15,7 +15,7 @@ Suggests:
     covr,
     testthat,
     knitr,
-    ggplot,
+    ggplot2,
     pander,
     faraway,
     rmarkdown
