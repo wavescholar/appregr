@@ -17,9 +17,13 @@ r_packages:
   - ggplot2
   - faraway
   - pander
+  - r-lib/pkgdown
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
+  - tar -C .. -xf $PKG_TARBALL
+  - rm -rf RTest.Rcheck
+  - Rscript -e 'pkgdown::build_site()'
 
 deploy:
   provider: pages
