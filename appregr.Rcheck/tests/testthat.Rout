@@ -19,7 +19,6 @@ Type 'q()' to quit R.
 > library(appregr)
 > #library(codecov.R)
 > test_check("appregr")
-[1] 6
 $key
 [1] "prostate"
 
@@ -33,11 +32,11 @@ $val
 [1] "Synthetic Count Data."
 
 ══ testthat results  ═══════════════════════════════════════════════════════════
-OK: 3 SKIPPED: 0 WARNINGS: 0 FAILED: 0
+OK: 1 SKIPPED: 0 WARNINGS: 0 FAILED: 0
 > 
 > #test package
 > #test_check('codecov.R')
 > 
 > proc.time()
    user  system elapsed 
-  0.280   0.052   0.330 
+  0.232   0.036   0.268 

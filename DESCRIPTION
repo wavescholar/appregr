@@ -10,15 +10,12 @@ Description: Wrapper code for regression diagnostics.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: 
-    MASS,
-    covr,
-    testthat,
-    knitr,
-    ggplot2,
-    pander,
-    faraway,
-    rmarkdown
+Suggests: MASS, covr, testthat, knitr, ggplot2, pander, faraway,
+        rmarkdown
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2019-07-09 02:27:54 UTC; travis
+Author: Bruce Campbell [aut, cre]
+Maintainer: Bruce Campbell <bruce@aloidia.solutions>
