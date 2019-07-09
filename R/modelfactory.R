@@ -5,18 +5,15 @@
 getmodel <- function(modelname) {
 
     ## error handling
-    if (!( is.character(modelname))) {
+    if (!( is.character(x))) {
         stop('Wrong object type, only character is supported.')
     }
 
     if (modelname=='prostate')
     {
         library(faraway)
-        if (requireNamespace("faraway", quietly = TRUE)) {
-            data(faraway::prostate, package="faraway")
-            df <-faraway::prostate 
-        }
-        
+        data(prostate, package="faraway")
+        df <-prostate 
         lm.fit <- lm(lpsa ~ ., data=df)
         results <- list(fit=lm.fit,data=df)
         return(results)
