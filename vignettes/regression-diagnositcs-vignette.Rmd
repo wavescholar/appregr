@@ -1,5 +1,5 @@
 ---
-title: "regression-workflow-vignette"
+title: "regression-diagnostics-vignette"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{regression-workflow-vignette}
@@ -22,6 +22,7 @@ library(pander)
 
 #### Fit Model
 ```{r}
+
 library(faraway)
 data(prostate, package="faraway")
 df <-prostate 
