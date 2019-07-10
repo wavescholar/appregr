@@ -3,7 +3,7 @@
 
 [![codecov](https://codecov.io/gh/brucebcampbell/appregr/branch/master/graph/badge.svg)](https://codecov.io/gh/brucebcampbell/appregr)
 
-
+[![TravisCI](https://travis-ci.com/brucebcampbell/appregr.svg?branch=master)](https://travis-ci.com/brucebcampbell/appregr.svg?branch=master)
 
 ## Installation
 

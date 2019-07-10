@@ -1,3 +1,4 @@
+
 language: r
 cache: packages
 warnings_are_errors: false
@@ -14,12 +15,16 @@ repos:
 
 r_packages:
   - covr
-  - ggplot
+  - ggplot2
   - faraway
   - pander
+  - pkgdown
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
+  - tar -C .. -xf $PKG_TARBALL
+  - rm -rf RTest.Rcheck
+  - Rscript -e 'pkgdown::build_site()'
 
 deploy:
   provider: pages

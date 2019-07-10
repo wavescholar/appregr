@@ -5,7 +5,7 @@
 getmodel <- function(modelname) {
 
     ## error handling
-    if (!( is.character(x))) {
+    if (!( is.character(modelname))) {
         stop('Wrong object type, only character is supported.')
     }
 
