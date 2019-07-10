@@ -18,6 +18,7 @@ checkleverage <- function(lm.fit,df)
 #' @export
 checkoutliers <- function(lm.fit,df)
 {
+  numPredictors <- ( ncol(df)-1)
   studentized.residuals <- rstudent(lm.fit)
   max.residual <- studentized.residuals[which.max(abs(studentized.residuals))]
   residualsrange <- range(studentized.residuals)
