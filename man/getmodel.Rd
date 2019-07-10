@@ -2,7 +2,7 @@
 % Please edit documentation in R/modelfactory.R
 \name{getmodel}
 \alias{getmodel}
-\title{Returns common models}
+\title{Returns a linear model and the dataframe of data}
 \usage{
 getmodel(modelname)
 }
@@ -13,5 +13,5 @@ getmodel(modelname)
 list(lm.fit,df) an object of type lm and the training data
 }
 \description{
-Returns common models
+Returns a linear model and the dataframe of data
 }

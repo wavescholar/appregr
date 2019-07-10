@@ -1,4 +1,4 @@
-#' Returns common models
+#' Returns a linear model and the dataframe of data
 #' @param modelname character 
 #' @return list(lm.fit,df) an object of type lm and the training data
 #' @export
@@ -25,6 +25,9 @@ getmodel <- function(modelname) {
     }
 }
 
+#' Returns a list of available datasets
+#' @return a dictionary (list of key,val) use key to pass into the getmodel function val is a description of the data
+#' @export
 listavailable <-function(){
     available <- list()
     dictelem <- c(key='prostate',val="The prostate data frame has 97 rows and 9 columns.
