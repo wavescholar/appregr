@@ -34,19 +34,16 @@ if(!require(faraway)){
     install.packages("faraway")
     library(faraway)
 }
-
-if(!require(HistData)){
-    install.packages("HistData")
-    library(HistData)
-}
+library(appregr)
 ```
 
 
 ```{r}
-library(faraway)
+
 data(gala, package="faraway")
 head(gala[,-2])
 lmod <- lm(Species ~ Area + Elevation + Nearest + Scruz  + Adjacent, data=gala)
+
 summary(lmod)
 require(faraway)
 sumary(lmod)

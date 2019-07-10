@@ -11,19 +11,15 @@ getmodel <- function(modelname) {
 
     if (modelname=='prostate')
     {
-        #library(faraway)
-        #data(prostate, package="faraway")
         df <-faraway::prostate
-        lm.fit <- lm(lpsa ~ ., data=df)
+        lm.fit <- stats::lm(lpsa ~ ., data=df)
         results <- list(fit=lm.fit,data=df)
         return(results)
     }
     if (modelname=='gala')
     {
-        #library(faraway)
-        #data(gala, package="faraway")
         df <-faraway::gala
-        lm.fit <- lm(Species ~ Area + Elevation + Nearest + Scruz  + Adjacent, data=gala, data=df)
+        lm.fit <- stats::lm(Species ~ Area + Elevation + Nearest + Scruz  + Adjacent, data=df)
         results <- list(fit=lm.fit,data=df)
         return(results)
     }
