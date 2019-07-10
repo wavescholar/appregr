@@ -39,28 +39,23 @@ Non-standard files/directories found at top level:
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
-* checking dependencies in R code ... NOTE
-'library' or 'require' call to ‘faraway’ in package code.
-  Please use :: or requireNamespace() instead.
-  See section 'Suggested packages' in the 'Writing R Extensions' manual.
+* checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... NOTE
-getmodel: no visible global function definition for ‘data’
-getmodel: no visible binding for global variable ‘prostate’
-getmodel: no visible global function definition for ‘lm’
+checkleverage: no visible global function definition for ‘hatvalues’
+checkoutliers: no visible global function definition for ‘rstudent’
+checkoutliers: no visible global function definition for ‘qt’
 Undefined global functions or variables:
-  data lm prostate
+  hatvalues qt rstudent
 Consider adding
-  importFrom("stats", "lm")
-  importFrom("utils", "data")
+  importFrom("stats", "hatvalues", "qt", "rstudent")
 to your NAMESPACE file.
-
-Found the following calls to data() loading into the global environment:
-File ‘appregr/R/modelfactory.R’:
-  data(prostate, package = "faraway")
-See section ‘Good practice’ in ‘?data’.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
 * checking for missing documentation entries ... WARNING
 Undocumented code objects:
   ‘mtcars’ ‘x’ ‘y’
@@ -69,6 +64,25 @@ Undocumented data sets:
 All user-level objects in a package should have documentation entries.
 See chapter ‘Writing R documentation files’ in the ‘Writing R
 Extensions’ manual.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'checkleverage'
+  ‘lm.fit’ ‘df’
+Documented arguments not in \usage in documentation object 'checkleverage':
+  ‘model’
+
+Undocumented arguments in documentation object 'checkoutliers'
+  ‘lm.fit’ ‘df’
+Documented arguments not in \usage in documentation object 'checkoutliers':
+  ‘model’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
 * checking contents of ‘data’ directory ... OK
 * checking data for non-ASCII characters ... OK
 * checking data for ASCII and uncompressed saves ... WARNING
@@ -84,4 +98,4 @@ Extensions’ manual.
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 WARNINGs, 4 NOTEs
+Status: 3 WARNINGs, 3 NOTEs

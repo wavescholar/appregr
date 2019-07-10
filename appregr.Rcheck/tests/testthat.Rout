@@ -23,13 +23,13 @@ $key
 [1] "prostate"
 
 $val
-[1] "The prostate data frame has 97 rows and 9 columns. A study on 97 men with prostate cancer who were due to receive a radical prostatectomy."
+[1] "The prostate data frame has 97 rows and 9 columns.\n                                A study on 97 men with prostate cancer who were due to receive a radical prostatectomy."
 
 $key
-[1] "count-data"
+[1] "gala"
 
 $val
-[1] "Synthetic Count Data."
+[1] "Species diversity on the Galapagos Islands There are 30 Galapagos islands and 7 variables in the dataset.\n                                  The relationship between the number of plant species and several geographic variables is of interest.\n                                  The original dataset contained several missing values which have been filled for convenience."
 
 ══ testthat results  ═══════════════════════════════════════════════════════════
 OK: 1 SKIPPED: 0 WARNINGS: 0 FAILED: 0
@@ -39,4 +39,4 @@ OK: 1 SKIPPED: 0 WARNINGS: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  0.232   0.036   0.268 
+  0.276   0.032   0.305 

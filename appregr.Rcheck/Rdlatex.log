@@ -71,9 +71,13 @@ No file Rd2.aux.
 (/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/home/travis/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/home/travis/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) [1{/home/travis/texli
+ve/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) [2]
 No file Rd2.ind.
-[1{/home/travis/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./Rd2.aux)
+[3] (./Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -84,9 +88,17 @@ xlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</home/travis/texlive/
 texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></home/travis/te
 xlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/travis/texlive/texm
 f-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/texmf-dist/fonts/
-type1/urw/times/utmr8a.pfb>
-Output written on Rd2.pdf (1 page, 47544 bytes).
+type1/urw/times/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/tim
+es/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pf
+b>
+Output written on Rd2.pdf (3 pages, 69222 bytes).
 Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (4 entries accepted, 0 rejected).
+Sorting entries....done (9 comparisons).
+Generating output file Rd2.ind....done (14 lines written, 0 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex)
  restricted \write18 enabled.
 entering extended mode
@@ -158,16 +170,211 @@ Writing index file Rd2.idx
 (/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
 (/home/travis/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/home/travis/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd) (./Rd2.toc)
-No file Rd2.ind.
-[1{/home/travis/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./Rd2.aux) ){/home/travis/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/hom
-e/travis/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</home/trav
-is/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></hom
-e/travis/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/travis/t
-exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/texmf-
-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on Rd2.pdf (1 page, 47544 bytes).
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) [1{/home/travis/texli
+ve/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) [2] (./Rd2.ind
+[3] [4]) (./Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ ){/home/travis/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/home/travis/te
+xlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</home/travis/texlive/
+texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></home/travis/te
+xlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/travis/texlive/texm
+f-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/texmf-dist/fonts/
+type1/urw/times/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/tim
+es/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pf
+b>
+Output written on Rd2.pdf (4 pages, 70432 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (4 entries accepted, 0 rejected).
+Sorting entries....done (9 comparisons).
+Generating output file Rd2.ind....done (14 lines written, 0 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2017-04-15>
+Babel <3.10> and hyphenation patterns for 3 language(s) loaded.
+(./Rd2.tex
+(/home/travis/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(/home/travis/texlive/texmf-dist/tex/latex/base/bk10.clo))
+(/home/travis/R-bin/lib/R/share/texmf/tex/latex/Rd.sty
+(/home/travis/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/base/alltt.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/tools/verbatim.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/url/url.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/base/textcomp.sty
+(/home/travis/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/home/travis/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/home/travis/texlive/texmf-dist/tex/latex/base/t1enc.def))
+(/home/travis/texlive/texmf-dist/tex/latex/psnfss/times.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/inconsolata/zi4.sty
+`inconsolata-zi4' v1.112, 2017/01/04 Text macros for Inconsolata (msharpe)
+(/home/travis/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/home/travis/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/home/travis/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+(/home/travis/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex)))))
+(/home/travis/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/home/travis/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/home/travis/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/home/travis/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/home/travis/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/home/travis/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/home/travis/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/home/travis/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+) (/home/travis/texlive/texmf-dist/tex/latex/base/makeidx.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def
+(/home/travis/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/home/travis/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/home/travis/texlive/texmf-dist/tex/latex/base/omsenc.dfu)
+(/home/travis/texlive/texmf-dist/tex/latex/base/ts1enc.dfu)))
+Writing index file Rd2.idx
+(./Rd2.aux) (/home/travis/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/home/travis/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/home/travis/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/home/travis/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(./Rd2.out) (./Rd2.out)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/home/travis/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/home/travis/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd) (./Rd2.toc)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) [1{/home/travis/texli
+ve/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) [2]
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) (./Rd2.ind [3]
+[4]) (./Rd2.aux) ){/home/travis/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}
+{/home/travis/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</home
+/travis/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb>
+</home/travis/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/tra
+vis/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/t
+exmf-dist/fonts/type1/urw/times/utmr8a.pfb></home/travis/texlive/texmf-dist/fon
+ts/type1/urw/times/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on Rd2.pdf (4 pages, 71271 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (4 entries accepted, 0 rejected).
+Sorting entries....done (9 comparisons).
+Generating output file Rd2.ind....done (14 lines written, 0 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2017-04-15>
+Babel <3.10> and hyphenation patterns for 3 language(s) loaded.
+(./Rd2.tex
+(/home/travis/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(/home/travis/texlive/texmf-dist/tex/latex/base/bk10.clo))
+(/home/travis/R-bin/lib/R/share/texmf/tex/latex/Rd.sty
+(/home/travis/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/base/alltt.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/tools/verbatim.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/url/url.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/base/textcomp.sty
+(/home/travis/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/home/travis/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/home/travis/texlive/texmf-dist/tex/latex/base/t1enc.def))
+(/home/travis/texlive/texmf-dist/tex/latex/psnfss/times.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/inconsolata/zi4.sty
+`inconsolata-zi4' v1.112, 2017/01/04 Text macros for Inconsolata (msharpe)
+(/home/travis/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/home/travis/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/home/travis/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+(/home/travis/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex)))))
+(/home/travis/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/home/travis/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/home/travis/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/home/travis/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/home/travis/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/home/travis/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/home/travis/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/home/travis/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 377.
+
+) (/home/travis/texlive/texmf-dist/tex/latex/base/makeidx.sty)
+(/home/travis/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def
+(/home/travis/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/home/travis/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/home/travis/texlive/texmf-dist/tex/latex/base/omsenc.dfu)
+(/home/travis/texlive/texmf-dist/tex/latex/base/ts1enc.dfu)))
+Writing index file Rd2.idx
+(./Rd2.aux) (/home/travis/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/home/travis/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/home/travis/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/home/travis/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/home/travis/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(./Rd2.out) (./Rd2.out)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/home/travis/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/home/travis/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd) (./Rd2.toc)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) [1{/home/travis/texli
+ve/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) [2]
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def) (./Rd2.ind [3]
+[4]) (./Rd2.aux) ){/home/travis/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}
+{/home/travis/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</home
+/travis/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb>
+</home/travis/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/tra
+vis/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/t
+exmf-dist/fonts/type1/urw/times/utmr8a.pfb></home/travis/texlive/texmf-dist/fon
+ts/type1/urw/times/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on Rd2.pdf (4 pages, 71270 bytes).
 Transcript written on Rd2.log.
 Saving output to ‘appregr-manual.pdf’ ...
 Done
-You may want to clean up by 'rm -Rf /tmp/RtmpYVKTlE/Rd2pdf5533a0a30e9'
+You may want to clean up by 'rm -Rf /tmp/RtmpLup2jk/Rd2pdf3e3d763b17b5'
