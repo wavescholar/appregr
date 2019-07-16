@@ -38,3 +38,46 @@ checkoutliers <- function(lm.fit,df)
   return(results)
   
 }
+
+
+
+
+#' Partial Regression 
+#' @param model dataframe
+#' @return data for partial regression plots
+#' @export
+partialregression <- function(lm.fit,df)
+{
+  predictors <-names(lm.fit$coefficients)
+  predictors <- predictors[2:length(predictors)]
+  lm.formula <- formula(lm.fit)
+  response <- lm.formula[[2]] 
+  results<-list()
+  for(i in 1:length(predictors))
+  {
+    predictor <- predictors[i]
+    others <- predictors[  which(predictors != predictor) ]
+    d.formula <-paste(response, " ~ ",sep='')
+    m.formula <-paste(predictor, " ~ ",sep='')
+    
+    for(j in 1:(length(others)-1))
+    { 
+      d.formula <-paste(d.formula, others[j]," + ", sep='')
+      m.formula <-paste(m.formula, others[j]," + ", sep='')
+    }
+    d.formula <-paste(d.formula, others[length(others)], sep='')
+    d.formula <-formula(d.formula)
+    
+    m.formula <-paste(m.formula, others[length(others)], sep='')
+    m.formula <-formula(m.formula)
+    
+    d <- residuals(lm(d.formula,df))
+    
+    m <- residuals(lm(m.formula,df))
+    
+    prr <- list( responseresiduals =d,covariateresiduals=m)
+    
+    results[[predictor]]<-prr
+  }
+  return(results)
+}
