@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.6.7)  10 JUL 2019 21:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.6.7)  16 JUL 2019 17:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -858,7 +858,7 @@ f-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/tim
 es/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pf
 b>
-Output written on Rd2.pdf (4 pages, 71270 bytes).
+Output written on Rd2.pdf (4 pages, 71271 bytes).
 PDF statistics:
  108 PDF objects out of 1000 (max. 8388607)
  95 compressed objects within 1 object stream

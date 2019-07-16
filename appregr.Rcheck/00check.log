@@ -47,10 +47,15 @@ Non-standard files/directories found at top level:
 checkleverage: no visible global function definition for ‘hatvalues’
 checkoutliers: no visible global function definition for ‘rstudent’
 checkoutliers: no visible global function definition for ‘qt’
+partialregression: no visible global function definition for ‘formula’
+partialregression: no visible global function definition for
+  ‘residuals’
+partialregression: no visible global function definition for ‘lm’
 Undefined global functions or variables:
-  hatvalues qt rstudent
+  formula hatvalues lm qt residuals rstudent
 Consider adding
-  importFrom("stats", "hatvalues", "qt", "rstudent")
+  importFrom("stats", "formula", "hatvalues", "lm", "qt", "residuals",
+             "rstudent")
 to your NAMESPACE file.
 * checking Rd files ... OK
 * checking Rd metadata ... OK
@@ -58,7 +63,7 @@ to your NAMESPACE file.
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... WARNING
 Undocumented code objects:
-  ‘mtcars’ ‘x’ ‘y’
+  ‘mtcars’ ‘partialregression’ ‘x’ ‘y’
 Undocumented data sets:
   ‘mtcars’ ‘x’ ‘y’
 All user-level objects in a package should have documentation entries.

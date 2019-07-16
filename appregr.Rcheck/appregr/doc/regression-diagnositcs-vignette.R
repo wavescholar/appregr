@@ -47,35 +47,15 @@ for(i in 1:length(predictors))
 
 
 ## ------------------------------------------------------------------------
-predictors <-names(lm.fit$coefficients)
-predictors <- predictors[2:length(predictors)]
+prr <- appregr::partialregression(lm.fit = lm.fit,df=df)
 
-lm.formula <- formula(lm.fit)
-response <- lm.formula[[2]] 
-
+predictors <-names(prr)
 for(i in 1:length(predictors))
 {
   predictor <- predictors[i]
-  others <- predictors[  which(predictors != predictor) ]
-  d.formula <-paste(response, " ~ ",sep='')
-  m.formula <-paste(predictor, " ~ ",sep='')
-  
-  for(j in 1:(length(others)-1))
-  { 
-    d.formula <-paste(d.formula, others[j]," + ", sep='')
-    m.formula <-paste(m.formula, others[j]," + ", sep='')
-  }
-  d.formula <-paste(d.formula, others[length(others)], sep='')
-  d.formula <-formula(d.formula)
-
-  m.formula <-paste(m.formula, others[length(others)], sep='')
-  m.formula <-formula(m.formula)
-
-  d <- residuals(lm(d.formula,df))
-  
-  m <- residuals(lm(m.formula,df))
-  
-  plot(m,d,xlab=paste(predictor, " residuals",sep=''),ylab="response residuals",main = paste("Partial regression plot for " , predictor,sep=''))
+  responseresiduals <-prr[[predictor]]$responseresiduals
+  covariateresiduals<- prr[[predictor]]$covariateresiduals
+  plot(covariateresiduals,responseresiduals,xlab=paste(predictor, " residuals",sep=''),ylab="response residuals",main = paste("Partial regression plot for " , predictor,sep=''))
 
 }
 
