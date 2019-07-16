@@ -1,0 +1,9 @@
+*.html
+*.R
+
+# knitr and R markdown default cache directories
+/*_cache/
+/cache/
+
+/*_files/
+/files/
