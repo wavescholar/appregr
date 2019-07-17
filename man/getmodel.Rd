@@ -7,7 +7,7 @@
 getmodel(modelname)
 }
 \arguments{
-\item{modelname}{character}
+\item{modelname}{character model to get}
 }
 \value{
 list(lm.fit,df) an object of type lm and the training data
