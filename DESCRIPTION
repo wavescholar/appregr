@@ -16,6 +16,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-07-17 15:13:17 UTC; travis
+Packaged: 2019-07-17 15:14:34 UTC; travis
 Author: Bruce Campbell [aut, cre]
 Maintainer: Bruce Campbell <bruce@aloidia.solutions>

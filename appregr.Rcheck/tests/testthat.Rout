@@ -1,5 +1,5 @@
 
-R version 3.4.0 (2017-01-27) -- "You Stupid Darkness"
+R version 3.5.0 (2017-01-27) -- "Joy in Playing"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -27,4 +27,4 @@ OK: 1 SKIPPED: 0 WARNINGS: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  0.464   0.012   0.471 
+  0.244   0.036   0.274 
