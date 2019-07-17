@@ -39,11 +39,5 @@ deploy:
   on:
     branch: master
 
-deploy:
-  provider: script
-  script: Rscript -e 'pkgdown::deploy_site_github()'
-  skip_cleanup: true
-
-
 notifications:
   slack: aloidiasolutions:wK07bxfNlwQ5Biau7Brvh9O1
