@@ -6,6 +6,9 @@
 \usage{
 modeldesc(modelname)
 }
+\arguments{
+\item{modelname}{name of model to describe}
+}
 \value{
 String with data description
 }

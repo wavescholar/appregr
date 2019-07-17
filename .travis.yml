@@ -27,9 +27,8 @@ after_success:
   - Rscript -e 'library(covr); codecov()'
   - tar -C .. -xf $PKG_TARBALL
   - rm -rf RTest.Rcheck
+  - R CMD INSTALL .
   - Rscript -e 'pkgdown::build_site()'
-
-before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
 
 deploy:
   provider: pages
