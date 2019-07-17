@@ -1,5 +1,6 @@
 #' Gets high leverage elements 
-#' @param model dataframe
+#' @param lm.fit linear model 
+#' @param df dataframe with training data
 #' @return data frame with high leverage data points
 #' @export
 checkleverage <- function(lm.fit,df)
@@ -13,7 +14,8 @@ checkleverage <- function(lm.fit,df)
 }
 
 #' Gets outliers 
-#' @param model dataframe
+#' @param lm.fit linear model 
+#' @param df dataframe with training data
 #' @return list with outliers residual range, and bonferroni corrected t vals
 #' @export
 checkoutliers <- function(lm.fit,df)
@@ -43,7 +45,8 @@ checkoutliers <- function(lm.fit,df)
 
 
 #' Partial Regression 
-#' @param model dataframe
+#' @param lm.fit linear model 
+#' @param df dataframe with training data
 #' @return data for partial regression plots
 #' @export
 partialregression <- function(lm.fit,df)

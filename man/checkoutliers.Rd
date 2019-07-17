@@ -7,7 +7,9 @@
 checkoutliers(lm.fit, df)
 }
 \arguments{
-\item{model}{dataframe}
+\item{lm.fit}{linear model}
+
+\item{df}{dataframe with training data}
 }
 \value{
 list with outliers residual range, and bonferroni corrected t vals

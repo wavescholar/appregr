@@ -1,5 +1,5 @@
 * using log directory ‘/home/travis/build/brucebcampbell/appregr/appregr.Rcheck’
-* using R version 3.5.0 (2017-01-27)
+* using R version 3.4.0 (2017-01-27)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
 * using option ‘--as-cran’
@@ -18,7 +18,6 @@ These were most likely included in error. See section ‘Package
 structure’ in the ‘Writing R Extensions’ manual.
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking serialization versions ... OK
 * checking whether package ‘appregr’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
@@ -26,7 +25,7 @@ structure’ in the ‘Writing R Extensions’ manual.
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... NOTE
 Non-standard files/directories found at top level:
-  ‘docs’ ‘LICENSE.md’ ‘revdep’
+  ‘LICENSE.md’ ‘revdep’
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
@@ -70,20 +69,8 @@ See chapter ‘Writing R documentation files’ in the ‘Writing R
 Extensions’ manual.
 * checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... WARNING
-Undocumented arguments in documentation object 'checkleverage'
-  ‘lm.fit’ ‘df’
-Documented arguments not in \usage in documentation object 'checkleverage':
-  ‘model’
-
-Undocumented arguments in documentation object 'checkoutliers'
-  ‘lm.fit’ ‘df’
-Documented arguments not in \usage in documentation object 'checkoutliers':
-  ‘model’
-
-Undocumented arguments in documentation object 'partialregression'
-  ‘lm.fit’ ‘df’
-Documented arguments not in \usage in documentation object 'partialregression':
-  ‘model’
+Undocumented arguments in documentation object 'modeldesc'
+  ‘modelname’
 
 Functions with \usage entries need to have the appropriate \alias
 entries, and all their arguments documented.

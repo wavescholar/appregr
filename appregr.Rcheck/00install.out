@@ -3,7 +3,7 @@
 ** data
 *** moving datasets to lazyload DB
 ** inst
-** byte-compile and prepare package for lazy loading
+** preparing package for lazy loading
 ** help
 *** installing help indices
 ** building package indices

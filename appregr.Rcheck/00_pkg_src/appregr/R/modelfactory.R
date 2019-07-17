@@ -1,5 +1,5 @@
 #' Returns a linear model and the dataframe of data
-#' @param modelname character 
+#' @param modelname character model to get
 #' @return list(lm.fit,df) an object of type lm and the training data
 #' @export
 getmodel <- function(modelname) {
@@ -38,6 +38,7 @@ listavailable <-function(){
 }
 
 #' Returns a description of requested dataset
+#' @param modelname name of model to describe
 #' @return String with data description
 #' @export
 modeldesc <-function(modelname){

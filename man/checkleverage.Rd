@@ -7,7 +7,9 @@
 checkleverage(lm.fit, df)
 }
 \arguments{
-\item{model}{dataframe}
+\item{lm.fit}{linear model}
+
+\item{df}{dataframe with training data}
 }
 \value{
 data frame with high leverage data points
