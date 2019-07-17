@@ -1,8 +1,8 @@
 
 language: r
 r:
-  - oldrel
-  - release
+  - 3.4.0
+  - 3.5.0
 cache: packages
 warnings_are_errors: false
 
