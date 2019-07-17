@@ -19,7 +19,6 @@ r_packages:
   - faraway
   - pander
   - pkgdown
-before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
@@ -27,6 +26,7 @@ after_success:
   - rm -rf RTest.Rcheck
   - Rscript -e 'pkgdown::build_site()'
 
+before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
 
 deploy:
   provider: pages
