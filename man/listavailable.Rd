@@ -7,7 +7,7 @@
 listavailable()
 }
 \value{
-a dictionary (list of key,val) use key to pass into the getmodel function val is a description of the data
+a list with descriptions - use names(returnvalue) to get valid names to pass into getmodel function.
 }
 \description{
 Returns a list of available datasets
