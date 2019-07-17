@@ -1,5 +1,8 @@
 
 language: r
+r:
+  - 3.4.0
+  - 3.5.0
 cache: packages
 warnings_are_errors: false
 
@@ -25,6 +28,8 @@ after_success:
   - tar -C .. -xf $PKG_TARBALL
   - rm -rf RTest.Rcheck
   - Rscript -e 'pkgdown::build_site()'
+
+before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
 
 deploy:
   provider: pages

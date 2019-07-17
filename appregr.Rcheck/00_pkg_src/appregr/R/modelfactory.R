@@ -26,20 +26,26 @@ getmodel <- function(modelname) {
 }
 
 #' Returns a list of available datasets
-#' @return a dictionary (list of key,val) use key to pass into the getmodel function val is a description of the data
+#' @return a list with descriptions - use names(returnvalue) to get valid names to pass into getmodel function.
 #' @export
 listavailable <-function(){
     available <- list()
-    dictelem <- c(key='prostate',val="The prostate data frame has 97 rows and 9 columns.
-                                A study on 97 men with prostate cancer who were due to receive a radical prostatectomy.")
+    available[['prostate']]<-"97 men with prostate cancer who were due to receive a radical prostatectomy."
 
-    available = c(available,dictelem)
+    available[['gala']]<-"Species diversity on the Galapagos Islands dataset"
+    
+    return(available)
+}
 
-    dictelem <- c(key='gala',val="Species diversity on the Galapagos Islands There are 30 Galapagos islands and 7 variables in the dataset.
-                                  The relationship between the number of plant species and several geographic variables is of interest.
-                                  The original dataset contained several missing values which have been filled for convenience.")
+#' Returns a description of requested dataset
+#' @return String with data description
+#' @export
+modeldesc <-function(modelname){
+    
+    available<-appregr::listavailable()
+    
 
-    available = c(available,dictelem)
-
-    print(available)
+    available[[modelname]]
+    
+    return(available)
 }

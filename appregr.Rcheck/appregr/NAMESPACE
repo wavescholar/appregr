@@ -2,6 +2,6 @@
 
 export(checkleverage)
 export(checkoutliers)
-export(partialregression)
 export(getmodel)
 export(listavailable)
+export(partialregression)

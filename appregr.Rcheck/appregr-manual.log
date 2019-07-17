@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.6.7)  16 JUL 2019 17:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.6.7)  17 JUL 2019 15:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -309,15 +309,15 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 
 Package hyperref Warning: Option `hyperindex' has already been used,
-(hyperref)                setting the option has no effect on input line 377.
+(hyperref)                setting the option has no effect on input line 366.
 
-Package hyperref Info: Option `colorlinks' set `true' on input line 377.
+Package hyperref Info: Option `colorlinks' set `true' on input line 366.
 
 Package hyperref Warning: Option `pagebackref' has already been used,
-(hyperref)                setting the option has no effect on input line 377.
+(hyperref)                setting the option has no effect on input line 366.
 
-Package hyperref Info: Option `linktocpage' set `true' on input line 377.
-Package hyperref Info: Option `plainpages' set `false' on input line 377.
+Package hyperref Info: Option `linktocpage' set `true' on input line 366.
+Package hyperref Info: Option `plainpages' set `false' on input line 366.
 ) (/home/travis/texlive/texmf-dist/tex/latex/base/makeidx.sty
 Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
 )
@@ -828,24 +828,27 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [2]
 (/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
-) (./Rd2.ind [3]
-[4
+)
+(/home/travis/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
+) [3] (./Rd2.ind
+[4] [5
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 116.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 116.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 138.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 138.
  (./Rd2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 116.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 116.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 138.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 138.
 Package rerunfilecheck Info: File `Rd2.out' has not changed.
-(rerunfilecheck)             Checksum: 05DC399C944A29B94EB37A380699E92D;260.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 116.
+(rerunfilecheck)             Checksum: 50CBBA1C8C8C4FCBF09AACECED226FF2;326.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 138.
  ) 
 Here is how much of TeX's memory you used:
- 6691 strings out of 494936
- 94985 string characters out of 6180743
- 173761 words of memory out of 5000000
+ 6700 strings out of 494936
+ 95197 string characters out of 6180743
+ 173728 words of memory out of 5000000
  9854 multiletter control sequences out of 15000+600000
  35928 words of font info for 45 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -858,10 +861,10 @@ f-dist/fonts/type1/urw/times/utmb8a.pfb></home/travis/texlive/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/tim
 es/utmr8a.pfb></home/travis/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pf
 b>
-Output written on Rd2.pdf (4 pages, 71271 bytes).
+Output written on Rd2.pdf (5 pages, 73386 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
- 31 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 127 PDF objects out of 1000 (max. 8388607)
+ 112 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 49 words of extra memory for PDF output out of 10000 (max. 10000000)
 

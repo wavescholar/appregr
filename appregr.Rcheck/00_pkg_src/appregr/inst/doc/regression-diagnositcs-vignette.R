@@ -9,7 +9,8 @@ library(appregr)
 library(pander)
 
 ## ------------------------------------------------------------------------
-mdf <- appregr::getmodel('prostate')
+modelname<-'prostate'
+mdf <- appregr::getmodel(modelname)
 df <- mdf$data
 lm.fit <- mdf$fit
 
@@ -29,11 +30,12 @@ if(nrow(resutls$outliers)>=1)
 
 
 ## ------------------------------------------------------------------------
+library(ggplot2)
 plot(lm.fit,which =4)
 plot(lm.fit,which = 5)
 
 ## ------------------------------------------------------------------------
-
+library(ggplot2)
 predictors <-names(lm.fit$coefficients)
 predictors <- predictors[2:length(predictors)]
 
@@ -41,8 +43,14 @@ for(i in 1:length(predictors))
 {
   predictor <- predictors[i]
   
-  plot(df[,predictor],residuals(lm.fit),xlab=,ylab="Residuals",main = paste(predictor, " versus residuals", sep = ''))
-
+  gg<- ggplot(data.frame(x=df[,predictor], y=residuals(lm.fit)),aes(x=x,y=y)) +geom_point()  +    
+  geom_smooth(method="loess",se=FALSE)+ 
+  labs(subtitle="residual plot", 
+       y="residuals", 
+       x=predictor, 
+       title=paste(predictor, " versus residuals", sep = ''), 
+       caption = modelname)
+  plot(gg)
 }
 
 

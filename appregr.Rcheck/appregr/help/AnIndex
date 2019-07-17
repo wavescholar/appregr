@@ -2,3 +2,4 @@ checkleverage	checkleverage
 checkoutliers	checkoutliers
 getmodel	getmodel
 listavailable	listavailable
+partialregression	partialregression

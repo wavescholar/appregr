@@ -3,3 +3,4 @@ checkoutliers           Gets outliers
 getmodel                Returns a linear model and the dataframe of
                         data
 listavailable           Returns a list of available datasets
+partialregression       Partial Regression
