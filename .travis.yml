@@ -1,5 +1,8 @@
 
 language: r
+r:
+  - oldrel
+  - release
 cache: packages
 warnings_are_errors: false
 
