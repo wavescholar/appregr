@@ -88,7 +88,7 @@
     
 <hr>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(appregr)</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">results &lt;-<span class="st"> </span>appregr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/appregr/topics/getmodel">getmodel</a></span>(<span class="st">"gala"</span>)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">results &lt;-<span class="st"> </span>appregr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/appregr/topics/getmodel">getmodel</a></span>(<span class="st">'gala'</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">lm.fit &lt;-<span class="st"> </span>results<span class="op">$</span>fit</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(lm.fit)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; </span></a>
@@ -114,8 +114,8 @@
 <a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; Residual standard error: 60.98 on 24 degrees of freedom</span></a>
 <a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt; Multiple R-squared:  0.7658, Adjusted R-squared:  0.7171 </span></a>
 <a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt; F-statistic:  15.7 on 5 and 24 DF,  p-value: 6.838e-07</span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27">df &lt;-<span class="st"> </span>results<span class="op">$</span>data</a>
-<a class="sourceLine" id="cb2-28" data-line-number="28">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/model.matrix">model.matrix</a></span>(<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, df)</a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">df &lt;-results<span class="op">$</span>data</a>
+<a class="sourceLine" id="cb2-28" data-line-number="28">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/model.matrix">model.matrix</a></span>( <span class="op">~</span><span class="st"> </span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz  <span class="op">+</span><span class="st"> </span>Adjacent,df)</a>
 <a class="sourceLine" id="cb2-29" data-line-number="29">y &lt;-<span class="st"> </span>df<span class="op">$</span>Species</a>
 <a class="sourceLine" id="cb2-30" data-line-number="30">xtxi &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/solve">solve</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(x) <span class="op">%*%</span><span class="st"> </span>x)</a>
 <a class="sourceLine" id="cb2-31" data-line-number="31">xtxi <span class="op">%*%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(x) <span class="op">%*%</span><span class="st"> </span>y</a>
@@ -126,7 +126,7 @@
 <a class="sourceLine" id="cb2-36" data-line-number="36"><span class="co">#&gt; Nearest      0.009143961</span></a>
 <a class="sourceLine" id="cb2-37" data-line-number="37"><span class="co">#&gt; Scruz       -0.240524230</span></a>
 <a class="sourceLine" id="cb2-38" data-line-number="38"><span class="co">#&gt; Adjacent    -0.074804832</span></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/solve">solve</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/crossprod">crossprod</a></span>(x, x), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/crossprod">crossprod</a></span>(x, y))</a>
+<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/solve">solve</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/crossprod">crossprod</a></span>(x,x),<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/crossprod">crossprod</a></span>(x,y))</a>
 <a class="sourceLine" id="cb2-40" data-line-number="40"><span class="co">#&gt;                     [,1]</span></a>
 <a class="sourceLine" id="cb2-41" data-line-number="41"><span class="co">#&gt; (Intercept)  7.068220709</span></a>
 <a class="sourceLine" id="cb2-42" data-line-number="42"><span class="co">#&gt; Area        -0.023938338</span></a>
@@ -148,10 +148,10 @@
 <a class="sourceLine" id="cb2-58" data-line-number="58">lm.fitsum<span class="op">$</span>sigma</a>
 <a class="sourceLine" id="cb2-59" data-line-number="59"><span class="co">#&gt; [1] 60.97519</span></a>
 <a class="sourceLine" id="cb2-60" data-line-number="60">xtxi &lt;-<span class="st"> </span>lm.fitsum<span class="op">$</span>cov.unscaled</a>
-<a class="sourceLine" id="cb2-61" data-line-number="61"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/diag">diag</a></span>(xtxi)) <span class="op">*</span><span class="st"> </span><span class="fl">60.975</span></a>
+<a class="sourceLine" id="cb2-61" data-line-number="61"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/diag">diag</a></span>(xtxi))<span class="op">*</span><span class="fl">60.975</span></a>
 <a class="sourceLine" id="cb2-62" data-line-number="62"><span class="co">#&gt; (Intercept)        Area   Elevation     Nearest       Scruz    Adjacent </span></a>
 <a class="sourceLine" id="cb2-63" data-line-number="63"><span class="co">#&gt; 19.15413865  0.02242228  0.05366264  1.05413269  0.21540158  0.01770013</span></a>
-<a class="sourceLine" id="cb2-64" data-line-number="64">lm.fitsum<span class="op">$</span>coef[, <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb2-64" data-line-number="64">lm.fitsum<span class="op">$</span>coef[,<span class="dv">2</span>]</a>
 <a class="sourceLine" id="cb2-65" data-line-number="65"><span class="co">#&gt; (Intercept)        Area   Elevation     Nearest       Scruz    Adjacent </span></a>
 <a class="sourceLine" id="cb2-66" data-line-number="66"><span class="co">#&gt; 19.15419782  0.02242235  0.05366280  1.05413595  0.21540225  0.01770019</span></a>
 <a class="sourceLine" id="cb2-67" data-line-number="67">qrx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/qr">qr</a></span>(x)</a>
@@ -165,7 +165,7 @@
 <a class="sourceLine" id="cb2-75" data-line-number="75"><span class="co">#&gt; [4,]    5.407646</span></a>
 <a class="sourceLine" id="cb2-76" data-line-number="76"><span class="co">#&gt; [5,] -119.498340</span></a>
 <a class="sourceLine" id="cb2-77" data-line-number="77"><span class="co">#&gt; [6,]  257.694369</span></a>
-<a class="sourceLine" id="cb2-78" data-line-number="78"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/backsolve">backsolve</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/qraux">qr.R</a></span>(qrx), f)</a>
+<a class="sourceLine" id="cb2-78" data-line-number="78"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/backsolve">backsolve</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/qraux">qr.R</a></span>(qrx),f)</a>
 <a class="sourceLine" id="cb2-79" data-line-number="79"><span class="co">#&gt;              [,1]</span></a>
 <a class="sourceLine" id="cb2-80" data-line-number="80"><span class="co">#&gt; [1,]  7.068220709</span></a>
 <a class="sourceLine" id="cb2-81" data-line-number="81"><span class="co">#&gt; [2,] -0.023938338</span></a>
@@ -174,67 +174,72 @@
 <a class="sourceLine" id="cb2-84" data-line-number="84"><span class="co">#&gt; [5,] -0.240524230</span></a>
 <a class="sourceLine" id="cb2-85" data-line-number="85"><span class="co">#&gt; [6,] -0.074804832</span></a>
 <a class="sourceLine" id="cb2-86" data-line-number="86"></a>
-<a class="sourceLine" id="cb2-87" data-line-number="87">df<span class="op">$</span>Adiff &lt;-<span class="st"> </span>df<span class="op">$</span>Area <span class="op">-</span><span class="st"> </span>df<span class="op">$</span>Adjacent</a>
-<a class="sourceLine" id="cb2-88" data-line-number="88">lm.fit &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Species <span class="op">~</span><span class="st"> </span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent <span class="op">+</span><span class="st"> </span>Adiff, </a>
-<a class="sourceLine" id="cb2-89" data-line-number="89">    df)</a>
-<a class="sourceLine" id="cb2-90" data-line-number="90"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(lm.fit)</a>
-<a class="sourceLine" id="cb2-91" data-line-number="91"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-92" data-line-number="92"><span class="co">#&gt; Call:</span></a>
-<a class="sourceLine" id="cb2-93" data-line-number="93"><span class="co">#&gt; lm(formula = Species ~ Area + Elevation + Nearest + Scruz + Adjacent + </span></a>
-<a class="sourceLine" id="cb2-94" data-line-number="94"><span class="co">#&gt;     Adiff, data = df)</span></a>
-<a class="sourceLine" id="cb2-95" data-line-number="95"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-96" data-line-number="96"><span class="co">#&gt; Residuals:</span></a>
-<a class="sourceLine" id="cb2-97" data-line-number="97"><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb2-98" data-line-number="98"><span class="co">#&gt; -111.679  -34.898   -7.862   33.460  182.584 </span></a>
-<a class="sourceLine" id="cb2-99" data-line-number="99"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-100" data-line-number="100"><span class="co">#&gt; Coefficients: (1 not defined because of singularities)</span></a>
-<a class="sourceLine" id="cb2-101" data-line-number="101"><span class="co">#&gt;              Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb2-102" data-line-number="102"><span class="co">#&gt; (Intercept)  7.068221  19.154198   0.369 0.715351    </span></a>
-<a class="sourceLine" id="cb2-103" data-line-number="103"><span class="co">#&gt; Area        -0.023938   0.022422  -1.068 0.296318    </span></a>
-<a class="sourceLine" id="cb2-104" data-line-number="104"><span class="co">#&gt; Elevation    0.319465   0.053663   5.953 3.82e-06 ***</span></a>
-<a class="sourceLine" id="cb2-105" data-line-number="105"><span class="co">#&gt; Nearest      0.009144   1.054136   0.009 0.993151    </span></a>
-<a class="sourceLine" id="cb2-106" data-line-number="106"><span class="co">#&gt; Scruz       -0.240524   0.215402  -1.117 0.275208    </span></a>
-<a class="sourceLine" id="cb2-107" data-line-number="107"><span class="co">#&gt; Adjacent    -0.074805   0.017700  -4.226 0.000297 ***</span></a>
-<a class="sourceLine" id="cb2-108" data-line-number="108"><span class="co">#&gt; Adiff              NA         NA      NA       NA    </span></a>
-<a class="sourceLine" id="cb2-109" data-line-number="109"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb2-110" data-line-number="110"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
-<a class="sourceLine" id="cb2-111" data-line-number="111"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-112" data-line-number="112"><span class="co">#&gt; Residual standard error: 60.98 on 24 degrees of freedom</span></a>
-<a class="sourceLine" id="cb2-113" data-line-number="113"><span class="co">#&gt; Multiple R-squared:  0.7658, Adjusted R-squared:  0.7171 </span></a>
-<a class="sourceLine" id="cb2-114" data-line-number="114"><span class="co">#&gt; F-statistic:  15.7 on 5 and 24 DF,  p-value: 6.838e-07</span></a>
-<a class="sourceLine" id="cb2-115" data-line-number="115"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb2-116" data-line-number="116">Adiffe &lt;-<span class="st"> </span>df<span class="op">$</span>Adiff <span class="op">+</span><span class="st"> </span><span class="fl">0.001</span> <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Uniform">runif</a></span>(<span class="dv">30</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb2-117" data-line-number="117">lm.fit &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Species <span class="op">~</span><span class="st"> </span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent <span class="op">+</span><span class="st"> </span>Adiffe, </a>
-<a class="sourceLine" id="cb2-118" data-line-number="118">    df)</a>
-<a class="sourceLine" id="cb2-119" data-line-number="119"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(lm.fit)</a>
-<a class="sourceLine" id="cb2-120" data-line-number="120"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-121" data-line-number="121"><span class="co">#&gt; Call:</span></a>
-<a class="sourceLine" id="cb2-122" data-line-number="122"><span class="co">#&gt; lm(formula = Species ~ Area + Elevation + Nearest + Scruz + Adjacent + </span></a>
-<a class="sourceLine" id="cb2-123" data-line-number="123"><span class="co">#&gt;     Adiffe, data = df)</span></a>
-<a class="sourceLine" id="cb2-124" data-line-number="124"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-125" data-line-number="125"><span class="co">#&gt; Residuals:</span></a>
-<a class="sourceLine" id="cb2-126" data-line-number="126"><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></a>
-<a class="sourceLine" id="cb2-127" data-line-number="127"><span class="co">#&gt; -103.698  -32.164   -7.108   21.682  185.800 </span></a>
-<a class="sourceLine" id="cb2-128" data-line-number="128"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-129" data-line-number="129"><span class="co">#&gt; Coefficients:</span></a>
-<a class="sourceLine" id="cb2-130" data-line-number="130"><span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
-<a class="sourceLine" id="cb2-131" data-line-number="131"><span class="co">#&gt; (Intercept)  3.296e+00  1.943e+01   0.170    0.867    </span></a>
-<a class="sourceLine" id="cb2-132" data-line-number="132"><span class="co">#&gt; Area        -4.512e+04  4.258e+04  -1.060    0.300    </span></a>
-<a class="sourceLine" id="cb2-133" data-line-number="133"><span class="co">#&gt; Elevation    3.130e-01  5.387e-02   5.811  6.4e-06 ***</span></a>
-<a class="sourceLine" id="cb2-134" data-line-number="134"><span class="co">#&gt; Nearest      3.827e-01  1.109e+00   0.345    0.733    </span></a>
-<a class="sourceLine" id="cb2-135" data-line-number="135"><span class="co">#&gt; Scruz       -2.620e-01  2.158e-01  -1.214    0.237    </span></a>
-<a class="sourceLine" id="cb2-136" data-line-number="136"><span class="co">#&gt; Adjacent     4.512e+04  4.258e+04   1.060    0.300    </span></a>
-<a class="sourceLine" id="cb2-137" data-line-number="137"><span class="co">#&gt; Adiffe       4.512e+04  4.258e+04   1.060    0.300    </span></a>
-<a class="sourceLine" id="cb2-138" data-line-number="138"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb2-139" data-line-number="139"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
-<a class="sourceLine" id="cb2-140" data-line-number="140"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-141" data-line-number="141"><span class="co">#&gt; Residual standard error: 60.82 on 23 degrees of freedom</span></a>
-<a class="sourceLine" id="cb2-142" data-line-number="142"><span class="co">#&gt; Multiple R-squared:  0.7767, Adjusted R-squared:  0.7185 </span></a>
-<a class="sourceLine" id="cb2-143" data-line-number="143"><span class="co">#&gt; F-statistic: 13.34 on 6 and 23 DF,  p-value: 1.729e-06</span></a>
-<a class="sourceLine" id="cb2-144" data-line-number="144"></a>
-<a class="sourceLine" id="cb2-145" data-line-number="145"><span class="co"># # data(odor, package='faraway') odor cov(odor[,-1]) lm.fit &lt;- lm(odor ~</span></a>
-<a class="sourceLine" id="cb2-146" data-line-number="146"><span class="co"># temp + gas + pack, odor) summary(lm.fit,cor=T) lm.fit &lt;- lm(odor ~ gas +</span></a>
-<a class="sourceLine" id="cb2-147" data-line-number="147"><span class="co"># pack, odor) summary(lm.fit) x &lt;- 1:20 y &lt;- x+rnorm(20)</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-87" data-line-number="87">df<span class="op">$</span>Adiff &lt;-<span class="st"> </span>df<span class="op">$</span>Area <span class="op">-</span>df<span class="op">$</span>Adjacent</a>
+<a class="sourceLine" id="cb2-88" data-line-number="88">lm.fit &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Species <span class="op">~</span><span class="st"> </span>Area<span class="op">+</span>Elevation<span class="op">+</span>Nearest<span class="op">+</span>Scruz<span class="op">+</span>Adjacent <span class="op">+</span>Adiff,df)</a>
+<a class="sourceLine" id="cb2-89" data-line-number="89"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(lm.fit)</a>
+<a class="sourceLine" id="cb2-90" data-line-number="90"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-91" data-line-number="91"><span class="co">#&gt; Call:</span></a>
+<a class="sourceLine" id="cb2-92" data-line-number="92"><span class="co">#&gt; lm(formula = Species ~ Area + Elevation + Nearest + Scruz + Adjacent + </span></a>
+<a class="sourceLine" id="cb2-93" data-line-number="93"><span class="co">#&gt;     Adiff, data = df)</span></a>
+<a class="sourceLine" id="cb2-94" data-line-number="94"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-95" data-line-number="95"><span class="co">#&gt; Residuals:</span></a>
+<a class="sourceLine" id="cb2-96" data-line-number="96"><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb2-97" data-line-number="97"><span class="co">#&gt; -111.679  -34.898   -7.862   33.460  182.584 </span></a>
+<a class="sourceLine" id="cb2-98" data-line-number="98"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-99" data-line-number="99"><span class="co">#&gt; Coefficients: (1 not defined because of singularities)</span></a>
+<a class="sourceLine" id="cb2-100" data-line-number="100"><span class="co">#&gt;              Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb2-101" data-line-number="101"><span class="co">#&gt; (Intercept)  7.068221  19.154198   0.369 0.715351    </span></a>
+<a class="sourceLine" id="cb2-102" data-line-number="102"><span class="co">#&gt; Area        -0.023938   0.022422  -1.068 0.296318    </span></a>
+<a class="sourceLine" id="cb2-103" data-line-number="103"><span class="co">#&gt; Elevation    0.319465   0.053663   5.953 3.82e-06 ***</span></a>
+<a class="sourceLine" id="cb2-104" data-line-number="104"><span class="co">#&gt; Nearest      0.009144   1.054136   0.009 0.993151    </span></a>
+<a class="sourceLine" id="cb2-105" data-line-number="105"><span class="co">#&gt; Scruz       -0.240524   0.215402  -1.117 0.275208    </span></a>
+<a class="sourceLine" id="cb2-106" data-line-number="106"><span class="co">#&gt; Adjacent    -0.074805   0.017700  -4.226 0.000297 ***</span></a>
+<a class="sourceLine" id="cb2-107" data-line-number="107"><span class="co">#&gt; Adiff              NA         NA      NA       NA    </span></a>
+<a class="sourceLine" id="cb2-108" data-line-number="108"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb2-109" data-line-number="109"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
+<a class="sourceLine" id="cb2-110" data-line-number="110"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-111" data-line-number="111"><span class="co">#&gt; Residual standard error: 60.98 on 24 degrees of freedom</span></a>
+<a class="sourceLine" id="cb2-112" data-line-number="112"><span class="co">#&gt; Multiple R-squared:  0.7658, Adjusted R-squared:  0.7171 </span></a>
+<a class="sourceLine" id="cb2-113" data-line-number="113"><span class="co">#&gt; F-statistic:  15.7 on 5 and 24 DF,  p-value: 6.838e-07</span></a>
+<a class="sourceLine" id="cb2-114" data-line-number="114"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb2-115" data-line-number="115">Adiffe &lt;-<span class="st"> </span>df<span class="op">$</span>Adiff<span class="fl">+0.001</span><span class="op">*</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Uniform">runif</a></span>(<span class="dv">30</span>)<span class="op">-</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb2-116" data-line-number="116">lm.fit &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Species <span class="op">~</span><span class="st"> </span>Area<span class="op">+</span>Elevation<span class="op">+</span>Nearest<span class="op">+</span>Scruz <span class="op">+</span>Adjacent<span class="op">+</span>Adiffe,df)</a>
+<a class="sourceLine" id="cb2-117" data-line-number="117"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(lm.fit)</a>
+<a class="sourceLine" id="cb2-118" data-line-number="118"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-119" data-line-number="119"><span class="co">#&gt; Call:</span></a>
+<a class="sourceLine" id="cb2-120" data-line-number="120"><span class="co">#&gt; lm(formula = Species ~ Area + Elevation + Nearest + Scruz + Adjacent + </span></a>
+<a class="sourceLine" id="cb2-121" data-line-number="121"><span class="co">#&gt;     Adiffe, data = df)</span></a>
+<a class="sourceLine" id="cb2-122" data-line-number="122"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-123" data-line-number="123"><span class="co">#&gt; Residuals:</span></a>
+<a class="sourceLine" id="cb2-124" data-line-number="124"><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></a>
+<a class="sourceLine" id="cb2-125" data-line-number="125"><span class="co">#&gt; -103.698  -32.164   -7.108   21.682  185.800 </span></a>
+<a class="sourceLine" id="cb2-126" data-line-number="126"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-127" data-line-number="127"><span class="co">#&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb2-128" data-line-number="128"><span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb2-129" data-line-number="129"><span class="co">#&gt; (Intercept)  3.296e+00  1.943e+01   0.170    0.867    </span></a>
+<a class="sourceLine" id="cb2-130" data-line-number="130"><span class="co">#&gt; Area        -4.512e+04  4.258e+04  -1.060    0.300    </span></a>
+<a class="sourceLine" id="cb2-131" data-line-number="131"><span class="co">#&gt; Elevation    3.130e-01  5.387e-02   5.811  6.4e-06 ***</span></a>
+<a class="sourceLine" id="cb2-132" data-line-number="132"><span class="co">#&gt; Nearest      3.827e-01  1.109e+00   0.345    0.733    </span></a>
+<a class="sourceLine" id="cb2-133" data-line-number="133"><span class="co">#&gt; Scruz       -2.620e-01  2.158e-01  -1.214    0.237    </span></a>
+<a class="sourceLine" id="cb2-134" data-line-number="134"><span class="co">#&gt; Adjacent     4.512e+04  4.258e+04   1.060    0.300    </span></a>
+<a class="sourceLine" id="cb2-135" data-line-number="135"><span class="co">#&gt; Adiffe       4.512e+04  4.258e+04   1.060    0.300    </span></a>
+<a class="sourceLine" id="cb2-136" data-line-number="136"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb2-137" data-line-number="137"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
+<a class="sourceLine" id="cb2-138" data-line-number="138"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-139" data-line-number="139"><span class="co">#&gt; Residual standard error: 60.82 on 23 degrees of freedom</span></a>
+<a class="sourceLine" id="cb2-140" data-line-number="140"><span class="co">#&gt; Multiple R-squared:  0.7767, Adjusted R-squared:  0.7185 </span></a>
+<a class="sourceLine" id="cb2-141" data-line-number="141"><span class="co">#&gt; F-statistic: 13.34 on 6 and 23 DF,  p-value: 1.729e-06</span></a>
+<a class="sourceLine" id="cb2-142" data-line-number="142"></a>
+<a class="sourceLine" id="cb2-143" data-line-number="143"><span class="co"># #</span></a>
+<a class="sourceLine" id="cb2-144" data-line-number="144"><span class="co"># data(odor, package="faraway")</span></a>
+<a class="sourceLine" id="cb2-145" data-line-number="145"><span class="co"># odor</span></a>
+<a class="sourceLine" id="cb2-146" data-line-number="146"><span class="co"># cov(odor[,-1])</span></a>
+<a class="sourceLine" id="cb2-147" data-line-number="147"><span class="co"># lm.fit &lt;- lm(odor ~ temp + gas + pack, odor)</span></a>
+<a class="sourceLine" id="cb2-148" data-line-number="148"><span class="co"># summary(lm.fit,cor=T)</span></a>
+<a class="sourceLine" id="cb2-149" data-line-number="149"><span class="co"># lm.fit &lt;- lm(odor ~ gas + pack, odor)</span></a>
+<a class="sourceLine" id="cb2-150" data-line-number="150"><span class="co"># summary(lm.fit)</span></a>
+<a class="sourceLine" id="cb2-151" data-line-number="151"><span class="co"># x &lt;- 1:20</span></a>
+<a class="sourceLine" id="cb2-152" data-line-number="152"><span class="co"># y &lt;- x+rnorm(20)</span></a></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
