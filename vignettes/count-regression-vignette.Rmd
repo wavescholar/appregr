@@ -1,0 +1,399 @@
+---
+title: "Count Regression"
+author: "Bruce Campbell"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    keep_tex: yes
+fontsize: 12pt
+bibliography: CountsRegression.bibtex
+subtitle: 'A tutorial on count regression '
+always_allow_html: yes
+---
+
+
+```{r setup, include=FALSE,echo=FALSE}
+knitr::opts_chunk$set(warning=FALSE)
+knitr::opts_chunk$set(dev='jpeg')
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(cache=TRUE)
+knitr::opts_chunk$set(tidy=TRUE)
+knitr::opts_chunk$set(prompt=FALSE)
+knitr::opts_chunk$set(message=FALSE)
+knitr::opts_chunk$set(comment=NA)
+```
+
+```{r echo=FALSE,results='hide',message=FALSE}
+rm(list = ls())
+library(papeR)
+library(sqldf)
+library(hexbin)
+library(knitr)
+library(pander)
+library(latex2exp)   #expmain <- TeX('$x_t = cos(\\frac{2\\pi t}{4}) + w_t$');x = ts(cos(2*pi*0:500/4) + rnorm(500,0,1));plot(x,main =expmain )
+library(ggplot2)
+library(GGally)
+invisible(library(pscl))
+```
+
+##Count regression review
+
+There are three basic types of count regression - Poisson, Binomial, and negative binomial.  The Poisson distribution falls in the class of exponential family. For a fixed number of trials - Binomial and negative binomial distributions fall under the exponential family as well.  These basic count models fall in the class of generalized linear model (GLM) and can all be fit in R using the ```glm``` function.  Counts with a large number of zeros can also be modeled as a mixture of a count and a Bernoulli distribution. These mixture responses are called Zero-Inflated models and can be fit in R using the ```zeroinfl``` function from the ```pscl``` package.   
+
+A (GLM)  consists of three components:
+\begin{itemize}
+\item The systematic component, $\eta_i = x_i \cdot \beta$, also called the linear predictor for observation $i$
+\item  A response $Y$ is governed by distribution for $Y$ from the exponential family
+\item The link function $g$ relating the linear predictor to the response. 
+\end{itemize}
+
+The systematic component, $\eta_i = x_i \cdot \beta$ is linear in the predictors so many of the concepts from linear modeling carry over to generalized linear modeling. This means that model specification and interpretation is the same.  The main difference is the link function and the response.
+
+An observation $Y_i$ over an interval $j$ follows a Poisson distribution if $P(Y_i=n)= \frac{\lambda_i^n}{n!}e^{-\lambda_i}$. We often decompose $\lambda$ into fixed $\theta$ and random $\eta_i$ effects, $\lambda_i=\theta e^{\eta_i}$. 
+A key aspect of a Poisson model is that after accounting for the effect of predictors, the mean must equal the variance. If the mean does not equal the variance, then a transformation might be appropriate or we may need to seek a count response with a better fit like a negative binomial. Another option is to add a dispersion parameter to a Poisson model. We say that our data is over-dispersed when the variance is larger than the mean in our dependent variable.  Over-dispersion is a problem if the conditional (residual) variance is larger than the conditional mean. Running an over-dispersed Poisson model will generate understated standard errors. Understated standard errors can lead to erroneous conclusions.
+
+The negative binomial response is described by series of independent trials, each with a probability of success $p$,  $Z$ be the number of trials until the $k$ th success.
+Then: 
+$$P(Z = z) = \binom{z-1}{k-1}p^k (1- p)^{z-k} \;\;\; z = k, k +1, \cdots$$
+For regression is is usually reparametrized $Y = Z -k$ and $p = \frac{1}{1+\alpha}$ then
+$$P(Y = y) =  \binom{y+k-1}{k -1}\frac{\alpha^y}{(1+\alpha)^{y+k}}$$
+Then we have the convenient representation for the mean and variance $E[Y] = \mu = k \alpha$ and $var(Y) = k \alpha+k \alpha^2 = \mu+\frac{\mu^2}{k}$.
+
+There are two ways to check for over-dispersion; the Pearson $\chi^2$ , and via the dispersion statistic calculated by R. If the variance is equal to the mean, the dispersion statistic would equal one. When the dispersion statistic is larger than one, a negative binomial model may fit better.  [@CameronTrivedi] recommended using robust standard errors for the parameter estimates to control for mild violation of the distribution assumption that the variance equals the mean. The R package ```sandwich``` can be used to obtain robust standard errors and calculated the p-values. 
+
+There are methods of eliminating or reducing the over-dispersion of the data. Scaling the standard errors and re-weighting the model weight with the inverse square root of the dispersion statistic is one approach.  We need to run the model twice - once to calculate the dispersion statistic and a second time with the adjusted weights (standard errors are multiplied by the square root of the dispersion). 
+
+The question of choosing between an overdispersed Poisson and a negative binomial model is a little more subtle. [@BovengVerHoef] work out the details of the differences between quasi-Poisson and negative binomial models. The variance of a quasi-Poisson model is a linear function of the mean $var(Y)=\phi \; \eta=\phi \; x_i \cdot \beta$, $while the variance of a negative binomial model is a quadratic function of the mean $var(Y) = k \alpha+k \alpha^2 = \mu+\frac{\mu^2}{k}$. These variance relationships affect the weights in the iteratively weighted least-squares (IRLS) algorithm of fitting models to data. Because the variance is a function of the mean, large and small counts get weighted differently in quasi-Poisson and negative binomial regression. 
+
+Count data are essentially measures of frequency.  There's a connection between counts and time to events. We see this in the relationinship between the exponential and Poisson distribution. Let $N_t$ be the number of events during time period $t$, and $X_t$ the time it takes for one additional event to arrive assuming that there was an event at time $t$ i.e. $(X_t> x) \implies (N_t=N_{t+x})$ The event on the left captures the condtion that no event occurs in the time interval $[t,t+x]$ which implies that our count of the number of events at time $t+x$ is identical to the count at time t which is the event on the right. Now using $P(X_t \leq x)=1-P(X_t>x)$ and the  above we can write $P(X_t > x)=1-P(N_{t+x}-N_t=0$. Since $P(N_{t+x}-N_t=0)=P(N_x=0)$ Now let $P$ be a Poisson pmf the above where $\lambda$ is the averx number of events per time unit and $x$ a quantity of time units, then $P(N_{t+x}-N_t=0)=\frac{\lambda x^0}{0!} e^{-\lambda x}=e^{-\lambda x}$ Writing another way $P(X_t \leq x)=1-e^{-\lambda x}$ which is the cdf of a exponential random variable. 
+
+Count data are intrinsically event frequency measures. There is a connection with repeated time to event processes. Events are binned within time intervals for a variety of practical reasons. Time intervals are generally of fixed length, but this is not necessarily always the case. Count data can be viewed as driven by an underlying hazard, where the hazard is the instantaneous rate of the events. Investigating how the hazard varies with covariates is one of the points of count modeling. If the hazard is time-varying, then binning events in time intervals dilutes information. In this case, we may - and often will be-  better off fitting time to events model. 
+
+Looking at $\lambda$ as a piecwise constant rate function allows us to establish the relationship between the Poisson and hazard model. Focusing on the probability of a zero event within an interval $[t_{j-1},t_j]$ when the hazard is known and constant. We have $$P(Y_i=0 \in [t_{j-1},t_j])=e^{-\lambda_i}$$ 
+which can also be written in terms of the hazard function
+$$P(Y_i=0)=S(t_j)=e^{-\int_{t_{j-1}}^{t_j}h_i(u) du} = e^{ h_i (t_j-t_{j-1})}$$ 
+@[Holford] showed the mathematical equivalence between piecewise hazard models and the Poisson count regression. 
+
+#Univariate Count Model - $y \sim x$
+
+In this section, we fit count models to the synthetic equidispersed Poisson data.  After looking at the baseline models, we investigate how overdispersed and zero-inflated data is fit. 
+
+### Generate equidispersed Poisson count data
+
+```{r , echo=TRUE}
+library(ggplot2)
+#sample size
+n <- 1000
+#regression coefficients
+beta0 <- 1
+beta1 <- 0.2
+#generate covariate values
+x <- runif(n=n, min=0, max=10)
+#compute mu's
+mu <- exp(beta0 + beta1 * x)
+#generate Y-values
+y <- rpois(n=n, lambda=mu)
+#data set
+modelling_data <- data.frame(y=y, x=x)
+
+pander(summarize(modelling_data),caption="Synthtic Data : Summary Statistics")
+
+ggplot(data=modelling_data) + geom_point(aes(x=x,y=y))
+
+```
+
+
+```{r}
+univariate.features<- c("x")
+i=1
+univariate.model.formula <- as.formula(paste('y ~ ' , univariate.features[i],sep = ''))
+
+model.string <- paste('poisson univariate ',univariate.model.formula,sep='')
+```
+
+
+```{r, fig.width=6,fig.height=6,echo=FALSE}
+bin.count <- 3
+h.y<-invisible(hist(modelling_data$x,breaks=bin.count,plot=FALSE))
+b<-h.y["breaks"]
+bc<-rapply(b,c)
+x_factor <-cut(modelling_data$x,bc)
+levels(x_factor) <- c(1:length(levels(x_factor)))
+modelling_data$x_factor <- x_factor
+```
+
+###Fit Poisson model of $y \sim x$.
+
+
+```{r}
+m1.poisson <- glm(univariate.model.formula, data = modelling_data,family = poisson)
+pander(summary(m1.poisson))
+```
+
+Looking at the predicted counts and doing some QA on our understanding of the model.
+
+```{r, fig.height==3}
+beta_0 <- m1.poisson$coefficients['(Intercept)']
+beta_1 <- m1.poisson$coefficients['x']
+
+predicted.counts.irr <-exp( predict(object = m1.poisson) )
+calculated.predicted.irr <-exp(beta_0+beta_1* modelling_data$x)
+#ggplot(data=data.frame(predicted.counts=predicted.counts.irr, calculated.predicted=calculated.predicted.irr),aes(x=calculated.predicted.irr,y=predicted.counts.irr))+geom_point()+ggtitle("QA plot - predicted versus hand calculated counts in rr scale")
+```
+
+### Fitting a negative binomial model.
+
+```{r}
+library(MASS)
+m1.negbin <- glm.nb(univariate.model.formula, data = modelling_data)
+print(m1.negbin)
+```
+
+The Poisson and negative binomial (NB) model are nested: Poisson is a particular case with $\theta = \infty$. So a likelihood ratio test comparing the two models is testing the null hypothesis that $\theta = \infty$ against the alternative that $\theta < \infty$.
+
+The form of the model equation for negative binomial regression is the same as that for Poisson regression. The log of the outcome is predicted with a linear combination of the predictors. The coefficients have an additive effect in the $ln(Y)$ scale and the incident rate ratios (IRR) have a multiplicative effect in the $Y$ scale.
+The dispersion parameter in negative binomial regression does not affect the expected counts, but it does change the estimated variance of the expected counts.
+
+```{r}
+library("lmtest")
+pander(lrtest(m1.poisson,m1.negbin),caption="LRT : Poisson vs Negative Binomial")
+```
+
+We apply a Vuong [@vuong] test of Poisson versus negative binomial models. Although the typical application of this test is for non-nested models, it should still be a valid way to compare the Poisson and negative binomial models. The Vuong non-nested test is based on a comparison of the predicted probabilities of two models that do not nest. Under the null that the models are indistinguishable, the test statistic is asymptotically distributed standard normal. The function will fail if the models do not contain identical values in their respective components named y (the value of the response being modeled) - hence it's usefulness for comparing count regression models. 
+
+A large, positive test statistic provides evidence of the superiority of model 1 over model 2, while a large, negative test statistic is evidence of the superiority of model 2 over model 1.
+
+```{r}
+vuong(m1.poisson,m1.negbin)
+```
+
+
+### We can get the confidence intervals for the coefficients by profiling the likelihood function.
+
+```{r}
+est.poisson <- cbind(Estimate = coef(m1.poisson), confint(m1.poisson))
+pander(est.poisson, caption="Poisson")
+
+
+est.negbin <- cbind(Estimate = coef(m1.negbin), confint(m1.negbin))
+pander(est.negbin, caption="negative binomial")
+```
+
+### Exponentiating the coefficients gives us the incident rate ratios. 
+
+```{r}
+
+pander(exp(est.poisson),caption="incident rate ratios poisson")
+
+pander(exp(est.negbin), caption="incident rate ratios negative binominal")
+```
+
+### The residual versus fitted. 
+
+Plotting the standardized deviance residuals to the predicted counts is another method of determining which model, Poisson or negative binomial, is a better fit for the data. The series of waves in the graph is not an unusual structure when graphing count model residuals and predicted outcomes.  A good fitting model will have the majority of the points between negative 2 and positive 2 on the y-axis. There should be few points below negative 3 and above positive 3.
+
+
+```{r}
+plotTitle <- TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = glm poisson',sep = ''))
+ggplot(data = data.frame(fitted =fitted(m1.poisson),residuals =residuals(m1.poisson)))+ geom_point(aes(x=fitted,y=residuals))+ggtitle(plotTitle)         
+
+plotTitle <- TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = MASS glm.nb Negative Binomial',sep = ''))
+ggplot(data = data.frame(fitted =fitted(m1.negbin),residuals =residuals(m1.negbin)))+ geom_point(aes(x=fitted,y=residuals))+ggtitle(plotTitle)         
+```
+
+
+###Looking at the robust SE corrected Poisson coefficients provided by the ```sandwich``` package 
+
+```{r}
+library(sandwich)
+cov.m1 <- vcovHC(m1.poisson, type="HC0")
+std.err <- sqrt(diag(cov.m1))
+r.est <- cbind(Estimate= coef(m1.poisson), "Robust SE" = std.err,
+"Pr(>|z|)" = 2 * pnorm(abs(coef(m1.poisson)/std.err), lower.tail=FALSE),
+LL = coef(m1.poisson) - 1.96 * std.err,
+UL = coef(m1.poisson) + 1.96 * std.err)
+
+pander(r.est,caption="SE corrected coefficients")
+```
+
+### Fitting an overdispersed Poisson. The dispersion parameter $\phi$ may be estimated. 
+
+$$\phi=\frac{X^2}{n-p} = \frac{\sum (y_i- \hat\mu_i)^2 / \hat\mu_i}{n-p}$$
+```{r}
+dp <- sum(residuals(m1.poisson,type="pearson")^2)/m1.poisson$df.res
+names(dp)<-"dispersion parameter"
+dp
+```
+```{r}
+summary(m1.poisson,dispersion=dp)
+```
+Notice that the estimation of the dispersion and the regression parameters is independent, so choosing a dispersion other than one has no effect on the regression parameter estimates.
+
+We can also achieve the same effect by fitting a quasi-Poisson model directly using ```glm```.
+
+```{r}
+m1.quasipoisson <- glm(univariate.model.formula, data = modelling_data,family = quasipoisson)
+summary(m1.quasipoisson)
+```
+
+
+We can not compare the quasi-Poisson and negative binomial models. The former is not fit using maximum likelihood, hence the Vuong test, which is a likelihood ratio based test, fails.
+
+## zero-inflated models 
+
+```{r}
+m1.poisson.zi <- zeroinfl(univariate.model.formula, data = modelling_data,dist = "poisson") 
+
+m1.negbin.zi <- zeroinfl(univariate.model.formula, data = modelling_data,dist = "negbin") 
+
+print(summary(m1.poisson.zi))
+
+print(summary(m1.negbin.zi))
+```
+
+Fitted versus residuals for the zero-inflated class of model. 
+
+```{r}
+plot(residuals(m1.poisson.zi) ~ fitted(m1.poisson.zi), pch='.', main=TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = zeroinfl poisson',sep = '')))
+
+
+plot(residuals(m1.negbin.zi) ~ fitted(m1.negbin.zi), pch='.', main=TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = zeroinfl negative binomial',sep = '')))
+```
+
+
+
+```{r}
+print(vuong(m1.poisson.zi,m1.negbin.zi))
+```
+
+#Dispersed Poisson Data 
+
+```{r}
+x <- x #disperse the data 
+mu <- exp(beta0 + beta1 * x)
+y <- 3*rpois(n=n, lambda=mu)
+modelling_data_dispersed <- data.frame(y=y, x=x)
+
+pander(summarize(modelling_data_dispersed),caption="Synthtic Data : Summary Statistics")
+
+ggplot(data=modelling_data_dispersed) + geom_point(aes(x=x,y=y))
+
+bin.count <- 3
+h.y<-invisible(hist(modelling_data_dispersed$x,breaks=bin.count,plot=FALSE))
+b<-h.y["breaks"]
+bc<-rapply(b,c)
+x_factor <-cut(modelling_data_dispersed$x,bc)
+levels(x_factor) <- c(1:length(levels(x_factor)))
+modelling_data_dispersed$x_factor <- x_factor
+
+m1.poisson <- glm(univariate.model.formula, data = modelling_data_dispersed,family = poisson)
+pander(summary(m1.poisson))
+
+beta_0 <- m1.poisson$coefficients['(Intercept)']
+beta_1 <- m1.poisson$coefficients['x']
+
+predicted.counts.irr <-exp( predict(object = m1.poisson) )
+calculated.predicted.irr <-exp(beta_0+beta_1* modelling_data_dispersed$x)
+#ggplot(data=data.frame(predicted.counts=predicted.counts.irr, calculated.predicted=calculated.predicted.irr),aes(x=calculated.predicted.irr,y=predicted.counts.irr))+geom_point()+ggtitle("QA plot - predicted versus hand calculated counts in rr scale")
+
+m1.negbin <- glm.nb(univariate.model.formula, data = modelling_data_dispersed)
+print(m1.negbin)
+
+pander(lrtest(m1.poisson,m1.negbin),caption="LRT : Poisson vs Negative Binomial")
+
+vuong(m1.poisson,m1.negbin)
+```
+
+```{r}
+est.poisson <- cbind(Estimate = coef(m1.poisson), confint(m1.poisson))
+pander(est.poisson, caption="Poisson")
+
+
+est.negbin <- cbind(Estimate = coef(m1.negbin), confint(m1.negbin))
+pander(est.negbin, caption="negative binomial")
+```
+
+```{r}
+plotTitle <- TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = glm poisson',sep = ''))
+ggplot(data = data.frame(fitted =fitted(m1.poisson),residuals =residuals(m1.poisson)))+ geom_point(aes(x=fitted,y=residuals))+ggtitle(plotTitle)         
+
+plotTitle <- TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = MASS glm.nb Negative Binomial',sep = ''))
+ggplot(data = data.frame(fitted =fitted(m1.negbin),residuals =residuals(m1.negbin)))+ geom_point(aes(x=fitted,y=residuals))+ggtitle(plotTitle)         
+```
+
+```{r}
+library(sandwich)
+cov.m1 <- vcovHC(m1.poisson, type="HC0")
+std.err <- sqrt(diag(cov.m1))
+r.est <- cbind(Estimate= coef(m1.poisson), "Robust SE" = std.err,
+"Pr(>|z|)" = 2 * pnorm(abs(coef(m1.poisson)/std.err), lower.tail=FALSE),
+LL = coef(m1.poisson) - 1.96 * std.err,
+UL = coef(m1.poisson) + 1.96 * std.err)
+
+pander(r.est,caption="SE corrected coefficients")
+```
+
+```{r}
+dp <- sum(residuals(m1.poisson,type="pearson")^2)/m1.poisson$df.res
+names(dp)<-"dispersion parameter"
+dp
+```
+
+```{r}
+summary(m1.poisson,dispersion=dp)
+```
+
+Notice that the estimation of the dispersion and the regression parameters is independent, so choosing a dispersion other than one does not affect the regression parameter estimates.
+
+We can also achieve the same effect by fitting a quasi-Poisson model directly using ```glm```.
+
+```{r}
+m1.quasipoisson <- glm(univariate.model.formula, data = modelling_data_dispersed,family = quasipoisson)
+summary(m1.quasipoisson)
+plot(residuals(m1.quasipoisson) ~ fitted(m1.quasipoisson), pch='.', main=TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = quasi-Poisson',sep = '')))
+```
+
+# Zero-inflated models 
+
+```{r}
+n<-600
+x <- runif(n=n, min=0, max=10)
+mu <- exp(beta0 + beta1 * x)
+y <- rpois(n=n, lambda=mu)
+
+n0<-400
+x0 <- runif(n=n0, min=0, max=3)
+y0<- rep(0,400)
+
+modelling_data_zeroinflated <- data.frame(y=c(y0,y), x=c(x0,x))
+
+ggplot(data=modelling_data_zeroinflated) + geom_point(aes(x=x,y=y))
+
+m1.poisson.zi <- zeroinfl(univariate.model.formula, data = modelling_data_zeroinflated,dist = "poisson") 
+
+m1.negbin.zi <- zeroinfl(univariate.model.formula, data = modelling_data_zeroinflated,dist = "negbin") 
+
+print(summary(m1.poisson.zi))
+
+
+print(summary(m1.negbin.zi))
+```
+
+Fitted versus residuals for the zero-inflated class of model. 
+
+```{r,echo=FALSE}
+plot(residuals(m1.poisson.zi) ~ fitted(m1.poisson.zi), pch='.', main=TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = zeroinfl poisson',sep = '')))
+
+
+plot(residuals(m1.negbin.zi) ~ fitted(m1.negbin.zi), pch='.', main=TeX(paste('residuals vs fitted : $$',gsub('_','-',as.character(univariate.model.formula)), '$$ model = zeroinfl negative binomial',sep = '')))
+```
+
+```{r}
+print(vuong(m1.poisson.zi,m1.negbin.zi))
+```
+
+
+
+#Bibliography

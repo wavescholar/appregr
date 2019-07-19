@@ -1,0 +1,290 @@
+---
+title: "Count Regression Part III - Heirarchical / Mixed Effects"
+author: "Bruce Campbell"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  pdf_document:
+    keep_tex: yes
+  html_document:
+    df_print: paged
+fontsize: 12pt
+bibliography: CountsRegression.bibtex
+subtitle: 'A tutorial on count regression '
+always_allow_html: yes
+---
+
+
+```{r setup, include=FALSE,echo=FALSE}
+knitr::opts_chunk$set(warning=FALSE)
+knitr::opts_chunk$set(dev='pdf')
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(cache=TRUE)
+knitr::opts_chunk$set(tidy=TRUE)
+knitr::opts_chunk$set(prompt=FALSE)
+knitr::opts_chunk$set(message=FALSE)
+knitr::opts_chunk$set(comment=NA)
+```
+
+```{r echo=FALSE,results='hide',message=FALSE}
+library(papeR)
+library(sqldf)
+library(hexbin)
+library(knitr)
+library(pander)
+library(latex2exp) 
+library(ggplot2)
+library(GGally)
+```
+
+##Bayesian Approaches to Count Regression 
+
+Please see the intorduction to count regression post for a review of count models from the maximum likelihood point o f view. Part 2 looks at the Bayesian implementation of count models.  Here in Part III we look to understand heirarchical count models. Some discussion on the principles involved is warranted since the terminology can be confusing. There are Bayesian and frequentist approches to this - each with their own terminology.  
+
+Without random coefficients, the standard Poisson model is:
+
+$$ \log E(y_{i}) = \alpha + X'_{i} \beta $$
+
+The log link is the canonical link function for the Poisson distribution, and the expected value of the response is modeled.
+
+With random coefficients, for example a random intercept, the model becomes:
+
+$$ \log E(y_{ij}|u_{j}) = \alpha + X'_{ij} \beta + u_{j} $$
+
+Where $y_{ij}$ is the observation for individual (i) in group (j) and $u_{j}$ is the random effect for group (j). Thus the two distributions are:
+
+$$ y \sim Pois(\lambda) $$
+
+and
+
+$$ u \sim N(0, \sigma^{2}) $$
+
+The random coefficient model is conditional on the random effect.
+Consider a simple model:
+
+$$ \log E(y_{ij}|u_{j}) = -.5 + .3x_{ij} + u_{j} $$
+
+In the original units, this becomes:
+
+$$ E(y_{ij}|u_{j}) = \exp(-.5 + .3x_{ij} + u_{j}) $$
+
+Now look what happens when we graph the estimated change for a 1 unit change in x for values of the random variable (u) ranging from 0 to 4 by increments of .5.
+
+```{r}
+par(mfrow=c(1,1))
+f <- function(x_ij, u_j) {
+    exp(-0.5 + x_ij * 0.3 + u_j)
+}
+for (i in seq(0, 4, 0.5)) {
+    curve(f(x, u_j = i), from = 0, to = 1, n = 200, add = i > 0, ylim = c(0,
+        45), ylab = "")
+}
+title(ylab = bquote(E(Y ~ l ~ x[ij], u[j])), main = "Effect of x for different random effects")
+```
+
+Clearly, on the scale of the original units, a 1 unit increase in x has different effects depending on the value of u, hence the conditionalness of the model. Population *average* effects can be obtained by integrating out the random effect or by fitting a marginal model such as using GEEs. Although the outcome is assumed to have a Poisson distribution, the random effect (in the above example, u) is typically assumed to have a Gaussian distribution.
+
+##Generate synthetic data $y_{ij} \sim  \;\; e^{\beta_0 + Z_i b + \beta_1 x_{ij}}$ 
+
+```{r, echo=FALSE}
+library(rstan)
+library(bayesplot)
+library(rstanarm)
+library(parallel)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+#sample size
+set.seed(133)
+n <- 1000
+numberOfGroups <- 5
+groupSize <- n/numberOfGroups
+
+randomEffectLevels <- rnorm(numberOfGroups,0,1) 
+
+randomEffects <- unlist(lapply(randomEffectLevels, function(x) rep(x,groupSize)))
+groupIdx <- unlist(lapply(1:numberOfGroups, function(x) rep(x,groupSize)))
+plot(randomEffects)
+#regression coefficients
+beta0 <- .2
+beta1 <- .1
+#generate covariate values
+x <- runif(n=n, min=0, max=10)
+linearPredictor <- beta0 + randomEffects + beta1 * x
+plot(x,linearPredictor)
+#compute mu's
+mu <- exp(linearPredictor)
+plot(x,mu)
+
+cor(linearPredictor,groupIdx)
+
+#generate overdispersed Y-values
+y <- rpois(n=n, lambda=mu)
+
+modelling_data <- data.frame(y=y, x=x,fixed=randomEffects,linearPredictor=linearPredictor,mu=mu,groupIdx=as.factor(groupIdx))
+
+pander(summarize(modelling_data),caption="Synthtic Data : Summary Statistics")
+
+ggplot(data=modelling_data) + geom_point(aes(x=linearPredictor,y=y))
+
+ggplot(data=modelling_data) + geom_point(aes(x=groupIdx,y=y))
+
+library(lme4)
+```
+
+
+#Fit Poisson mixed effects model.
+
+```{r}
+m <- glmer(y ~ x + (x | groupIdx ), modelling_data, family =poisson(link = "log"))
+summary(m)
+vv <- vcov.merMod(m, corr=TRUE)
+as(vv, "corMatrix")# extracts the ("hidden") 'correlation' entry in @factors
+```
+
+
+## Student Data Exaple
+
+The example data we use comes from a sample of the high school and beyond data set, with a made up variable, number of awards a student receives, awards. Our main predictor will be sex, female, and students are clustered (grouped) within schools, cid.
+
+```{r}
+require(foreign)
+
+## ggplot2 package for graphs
+require(ggplot2)
+```
+
+
+```{r}
+#require(glmmADMB)
+## load lme4 package
+require(lme4)
+## read in data
+dat <- read.dta("https://stats.idre.ucla.edu/stat/data/hsbdemo.dta")
+dat$cid <- factor(dat$cid)
+
+## look at the first few rows of the dataset
+head(dat)
+```
+
+We can get a sense of the distributions in the data using the ggplot2 package. The first plot is just histograms of number of awards for every cid. The second is a filled density plot. The density sums to 1 and the fill shows the distribution of female at every level of awards. If the distribution of female is equal across all awards, they would fall on the horizontal line.
+
+## awards by school
+```{r}
+ggplot(dat, aes(awards)) + geom_histogram(binwidth = 0.5) + facet_wrap(~cid)
+
+
+ggplot(modelling_data, aes(y)) + geom_histogram(binwidth = 0.5) + facet_wrap(~groupIdx)
+
+# density of awards by sex, line at .5 is the null of no sex differences
+# in number of awards
+ggplot(dat, aes(factor(awards))) + geom_bar(aes(fill = female), position = "fill") + geom_hline(yintercept = 0.5)
+```
+
+Analysis methods you might consider
+- Random coefficient poisson models, the focus of this page.
+- Poisson regression with robust standard errors
+- Random coefficient poisson model analysis
+- Because generalized linear mixed models (GLMMs) such as random coefficient poisson models are rather difficult to fit, there tends to be some variability in parameter estimates between different programs. We will demonstrate the use of two packages in R that are able to fit these models, lme4 and glmmADMB.
+```{r}
+## fit a random intercept only model using the Laplace approximation
+## (equivalent to 1 point evaluated per axis in Gauss-Hermite
+## approximation)
+m1a <- glmer(awards ~ 1 + (1 | cid), data = dat, family = poisson(link = "log"))
+## fit a random intercept only model using 100 points per axis in the
+## adaptive Gauss-Hermite approximation of the log likelihood more points
+## improves accuracy but will take longer
+m1b <- glmer(awards ~ 1 + (1 | cid), data = dat, family = poisson(link = "log"), nAGQ = 100)
+
+## compare (only slightly different)
+rbind(m1a = coef(summary(m1a)), m1b = coef(summary(m1b)))
+
+summary(m1b)
+
+## QQ plot
+plot(ranef(m1b))
+## $cid
+
+## Caterpillar plot
+lattice::dotplot(ranef(m1b, postVar = TRUE))
+## $cid
+```
+The estimate for the intercept is essentially 0, although the random effects variance indicates that there is some variability in the intercepts between schools. Now we will add in female as an explanatory variable.
+
+```{r}
+m2 <- glmer(awards ~ 1 + female + (1 | cid), data = dat, family = poisson(link = "log"), nAGQ = 100)
+summary(m2)
+```
+
+There appears to be a fairly strong effect of females such that females tend to get more awards than males. Now we will fit the same models using the glmmADMB package
+
+```{r}
+## random intercept only model
+# library(glmmADMB)
+# m.alt1 <- glmmadmb(awards ~ 1 + (1 | cid), data = dat, family = "poisson", link = "log")
+# m.alt2 <- glmmadmb(awards ~ 1 + female + (1 | cid), data = dat, family = "poisson", link = "log")
+# summary(m.alt1)
+```
+
+The results from glmmadmb match closely with those from glmer.
+
+
+## Sleep Study Example
+
+
+```{r}
+
+library(lme4)
+require(lattice)
+fm1 <- lmer(Reaction ~ Days + (Days|Subject), sleepstudy)
+fm2 <- lmer(Reaction ~ Days + (1|Subject) + (0+Days|Subject), sleepstudy)
+fm3 <- lmer(diameter ~ (1|plate) + (1|sample), Penicillin)
+ranef(fm1)
+str(rr1 <- ranef(fm1,condVar = TRUE))
+dotplot(rr1)  ## default
+## specify free scales in order to make Day effects more visible
+dotplot(rr1,scales = list(x = list(relation = 'free')))[["Subject"]]
+ranef(fm2)
+op <- options(digits = 4)
+ranef(fm3, drop = TRUE)
+options(op)
+## as.data.frame() provides RE's and conditional standard deviations:
+str(dd <- as.data.frame(rr1))
+if (require(ggplot2)) {
+  ggplot(dd, aes(y=grp,x=condval)) +
+    geom_point() + facet_wrap(~term,scales="free_x") +
+    geom_errorbarh(aes(xmin=condval -2*condsd,
+                       xmax=condval +2*condsd), height=0)
+}
+```
+
+# Experiment with regressions (mixed models or interaction terms):
+
+```{r}
+# Load packages:
+library(caret)
+
+# Set seed to insure reproducability: 
+set.seed(1)
+
+# Split randomly into training and testing: 
+training_indices = sample(size = round(dim(modelling_data)[1]/10), x = 1:dim(modelling_data)[1], replace = FALSE)
+modelling_data = modelling_data[training_indices, ]
+modelling_data_test = modelling_data[-training_indices, ]
+
+# Compare held out performance of random slopes against interaction term:
+interaction_model = glm(y ~ x:groupIdx, modelling_data, family = "poisson")
+random_slopes_model = glmer(y ~ x | groupIdx, modelling_data, family = "poisson")
+confusion_matrix_interaction_model = confusionMatrix(data = as.factor(as.logical(predict(interaction_model, newdata = modelling_data_test[, -which(names(modelling_data_test) == "y")], type = "response") > .5)), reference = as.factor(as.logical(modelling_data_test$y > 0)), positive = "TRUE")
+confusion_matrix_random_slopes_model = confusionMatrix(data = as.factor(as.logical(predict(random_slopes_model, newdata = modelling_data_test[, -which(names(modelling_data_test) == "y")], type = "response") > .5)), reference = as.factor(as.logical(modelling_data_test$y > 0)), positive = "TRUE")
+confusion_matrix_interaction_model
+confusion_matrix_random_slopes_model
+
+# and of random intercepts against both terms:
+two_predictors = glm(y ~ x:groupIdx, modelling_data, family = "poisson")
+random_intercepts_model = glmer(y ~ x | groupIdx, modelling_data, family = "poisson")
+confusion_matrix_two_predictors = confusionMatrix(data = as.factor(as.logical(predict(two_predictors, newdata = modelling_data_test[, -which(names(modelling_data_test) == "y")], type = "response") > .5)), reference = as.factor(as.logical(modelling_data_test$y > 0)), positive = "TRUE")
+confusion_matrix_random_intercepts_model = confusionMatrix(data = as.factor(as.logical(predict(random_intercepts_model, newdata = modelling_data_test[, -which(names(modelling_data_test) == "y")], type = "response") > .5)), reference = as.factor(as.logical(modelling_data_test$y > 0)), positive = "TRUE")
+confusion_matrix_two_predictors
+confusion_matrix_random_intercepts_model
+```
+
+The simulated data are generated with 5 random intercepts and a shared slope for the log rate in a Poisson regression. On this simulated data, the random slopes performs slightly better on test data than the interacting predictors model. The random intercepts performs slightly better on test data than the two predictors model. 
