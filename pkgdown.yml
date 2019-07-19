@@ -2,6 +2,10 @@ pandoc: '2.2'
 pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
+  count-regression-bayesian-vignette: count-regression-bayesian-vignette.html
+  count-regression-hierarchical-mixedeffect-partII-vignettes: count-regression-hierarchical-mixedeffect-partII-vignettes.html
+  count-regression-hierarchical-mixedeffects-vignette: count-regression-hierarchical-mixedeffects-vignette.html
+  count-regression-vignette: count-regression-vignette.html
   regression-diagnositcs-vignette: regression-diagnositcs-vignette.html
   regression-numerical-linalg-vignette: regression-numerical-linalg-vignette.html
 
