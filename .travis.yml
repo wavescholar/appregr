@@ -1,7 +1,7 @@
 
 language: r
 r:
-  - 3.5.0
+  - 3.6.0
 cache: packages
 warnings_are_errors: false
 
