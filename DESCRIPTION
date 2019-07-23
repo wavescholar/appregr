@@ -36,7 +36,8 @@ Suggests:
     rstan,
     rstanarm,
     sandwich,
-    sqldf
+    sqldf,
+    coda
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
