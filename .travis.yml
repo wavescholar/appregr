@@ -1,6 +1,6 @@
 
 language: r
-r:  
+r:
   - 3.5.0
 cache: packages
 warnings_are_errors: false
@@ -21,6 +21,26 @@ r_packages:
   - faraway
   - pander
   - pkgdown
+  - rmarkdown
+  - pscl
+  - bayesm
+  - lattice
+  - lme4
+  - lmtest
+  - R2jags
+  - bayesplot
+  - caret
+  - GGally
+  - ggplot2
+  - hexbin
+  - latex2exp
+  - papeR
+  - parallel
+  - rstan
+  - rstanarm
+  - sandwich
+  - sqldf
+  - coda
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
