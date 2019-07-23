@@ -18,7 +18,25 @@ Suggests:
     ggplot2,
     pander,
     faraway,
-    rmarkdown
+    rmarkdown,
+    pscl,
+    bayesm,
+    lattice,
+    lme4,
+    lmtest,
+    R2jags,
+    bayesplot,
+    caret,
+    GGally,
+    ggplot2,
+    hexbin,
+    latex2exp,
+    papeR,
+    parallel,
+    rstan,
+    rstanarm,
+    sandwich,
+    sqldf
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

@@ -1,0 +1,28 @@
+model {
+# Priors
+mu_int~dnorm(0, 0.0001) # mean for random intercepts
+mu_slope~dnorm(0, 0.0001) # mean for random slopes
+sigma_int~dunif(0, 100) # SD of intercepts
+sigma_slope~dunif(0, 100) # SD of slopes
+rho~dunif(-1, 1) # correlation between intercepts and slopes
+Sigma_B[1, 1] <- pow(sigma_int, 2) # We start assembling the var-covar matrix for the random effects
+Sigma_B[2, 2] <- pow(sigma_slope, 2)
+Sigma_B[1, 2] <- rho*sigma_int*sigma_slope
+Sigma_B[2, 1] <- Sigma_B[1, 2]
+covariance <- Sigma_B[1, 2]
+Tau_B[1:2, 1:2] <- inverse(Sigma_B[,])
+for (i in 1:n_subj) {
+    B_hat[i, 1] <- mu_int
+    B_hat[i, 2] <- mu_slope
+    B[i, 1:2]~dmnorm(B_hat[i, ], Tau_B[,]) # the pairs of correlated random effects
+    alpha[i] <- B[i, 1] # random intercept
+    beta[i] <- B[i, 2] # random slope
+}
+sigma_res~dunif(0, 100) # Residual standard deviation
+tau_res <- 1/(sigma_res*sigma_res)
+# Likelihood
+for (i in 1:n_obs) {
+    mu[i] <- alpha[subjects[i]]+beta[subjects[i]]*x[i]
+    y[i]~dnorm(mu[i], tau_res)
+}
+}

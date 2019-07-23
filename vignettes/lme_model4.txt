@@ -1,0 +1,64 @@
+model {
+
+# Set up the means for the multivariate ranef distribution
+for (i in 1:2) {
+    xi[i]~dunif(0, 100) # scaling for the multivariate ranef distribution (for means, sds, and the ranefs themselves)
+    mu_raw[i]~dnorm(0, .0001) # unscaled means for the multivariate ranef distribution
+    mu[i] <- xi[i]*mu_raw[i] # scaled means for the multivariate ranef distribution
+}
+mu_int <- mu[1] # mean for random intercepts
+mu_slope <- mu[2] # mean for random slopes
+
+# Set up the var-covar matrix for the multivariate ranef distribution
+Tau_B_raw[1:2, 1:2] ~ dwish(W[,], 3) # W is the identity matrix, provided as data; we have 3 dofs, i.e., 2 ranefs + 1, to ensure a uniform (-1, 1) prior for the correlation between ranefs
+Sigma_B_raw[1:2, 1:2] <- inverse(Tau_B_raw[,])
+for (i in 1:2) {
+    sigma[i] <- xi[i]*sqrt(Sigma_B_raw[i, i])
+}
+sigma_int <- sigma[1] # SD of intercepts
+sigma_slope <- sigma[2] # SD of slopes
+for (i in 1:2) { for (j in 1:2) {
+    rho[i, j] <- Sigma_B_raw[i, j]/sqrt(Sigma_B_raw[i, i]*Sigma_B_raw[j, j])
+} }
+rho_int_slope <- rho[1, 2]
+covariance <- rho_int_slope*sigma_int*sigma_slope
+
+# The multivariate ranef distribution, i.e., modeling the correlated ranefs
+for (j in 1:n_subj) {
+	B_raw_hat[j, 1] <- mu_raw[1]
+	B_raw_hat[j, 2] <- mu_raw[2]
+	B_raw[j, 1:2] ~ dmnorm(B_raw_hat[j, ], Tau_B_raw[, ]) # the pairs of unscaled (raw) correlated random effects
+	alpha[j] <- xi[1]*B_raw[j, 1] # random intercept
+    beta[j] <- xi[2]*B_raw[j, 2] # random slope
+}
+
+# Model the resid. sd independently
+sigma_res~dunif(0, 100) # Residual standard deviation
+tau_res <- 1/(sigma_res*sigma_res)
+
+# Likelihood
+for (i in 1:n_obs) {
+    mu_obs[i] <- alpha[subjects[i]]+beta[subjects[i]]*x[i]
+    y[i]~dnorm(mu_obs[i], tau_res)
+}
+
+# Sampling from the prior: given that we do not place hyperpriors directly on the means, sds and correlation(s) of the multivariate ranef distribution, we want to sample from the prior to make sure we didn't accidentally make it more informed than we wanted (and we want it very vague)
+for (i in 1:2) {
+    xi_prior[i]~dunif(0, 100)
+    mu_raw_prior[i]~dnorm(0, .0001)
+    mu_prior[i] <- xi_prior[i]*mu_raw_prior[i]
+}
+mu_int_prior <- mu_prior[1]
+mu_slope_prior <- mu_prior[2]
+Tau_B_raw_prior[1:2, 1:2] ~ dwish(W[,], 3)
+Sigma_B_raw_prior[1:2, 1:2] <- inverse(Tau_B_raw_prior[,])
+for (i in 1:2) {
+    sigma_prior[i] <- xi_prior[i]*sqrt(Sigma_B_raw_prior[i, i])
+}
+sigma_int_prior <- sigma_prior[1]
+sigma_slope_prior <- sigma_prior[2]
+for (i in 1:2) { for (j in 1:2) {
+    rho_prior[i, j] <- Sigma_B_raw_prior[i, j]/sqrt(Sigma_B_raw_prior[i, i]*Sigma_B_raw_prior[j, j])
+} }
+rho_int_slope_prior <- rho_prior[1, 2]
+}
