@@ -1,6 +1,4 @@
 # appregr
-[![DOI](logo.svg |width=128)]
-![](logo.svg =250x250)
 
 [![DOI](https://zenodo.org/badge/195104416.svg)](https://zenodo.org/badge/latestdoi/195104416)
 

@@ -16,7 +16,7 @@ always_allow_html: yes
 ```{r setup, include=FALSE,echo=FALSE}
 rm(list = ls())
 knitr::opts_chunk$set(warning = FALSE)
-knitr::opts_chunk$set(dev = "pdf")
+knitr::opts_chunk$set(dev = "png")
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(cache = TRUE)
 knitr::opts_chunk$set(tidy = TRUE)
