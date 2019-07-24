@@ -1,7 +1,7 @@
 Package: appregr
 Title: Demonstrates Regression Workflow and Diagnostics
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person(given = "Bruce",
            family = "Campbell",
            role = c("aut", "cre"),
@@ -10,7 +10,7 @@ Description: Wrapper code for regression diagnostics.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: 
+Suggests:
     MASS,
     covr,
     testthat,
@@ -18,26 +18,8 @@ Suggests:
     ggplot2,
     pander,
     faraway,
-    rmarkdown,
-    pscl,
-    bayesm,
-    lattice,
-    lme4,
-    lmtest,
-    R2jags,
-    bayesplot,
-    caret,
-    GGally,
-    ggplot2,
-    hexbin,
-    latex2exp,
-    papeR,
-    parallel,
-    rstan,
-    rstanarm,
-    sandwich,
-    sqldf,
-    coda
+    rmarkdown
+    
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
