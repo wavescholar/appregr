@@ -1,5 +1,7 @@
 # appregr
 
+[![logo](apple-touch-icon-120x120.png)](apple-touch-icon-120x120.png)
+
 [![DOI](https://zenodo.org/badge/195104416.svg)](https://zenodo.org/badge/latestdoi/195104416)
 
 [![codecov](https://codecov.io/gh/brucebcampbell/appregr/branch/master/graph/badge.svg)](https://codecov.io/gh/brucebcampbell/appregr)
