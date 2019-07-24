@@ -1,0 +1,29 @@
+"0","rstan_options(auto_write = TRUE)"
+"0","options(mc.cores = parallel::detectCores())"
+"0","#sample size"
+"0","n <- 1000"
+"0","#regression coefficients"
+"0","beta0 <- 1"
+"0","beta1 <- 0.2"
+"0","#generate covariate values"
+"0","x <- runif(n=n, min=0, max=10)"
+"0","#compute mu's"
+"0","mu <- exp(beta0 + beta1 * x)"
+"0","#generate overdispersed Y-values"
+"0","y <- 3*rpois(n=n, lambda=mu)"
+"0","modelling_data <- data.frame(y=y, x=x)"
+"0",""
+"0","pander(summarize(modelling_data),caption=""Synthtic Data : Summary Statistics"")"
+"1","
+--------------------------------------------------------------------
+      N        Mean     SD        Min     Q1    Median    Q3    Max 
+--- ------ -- ------- ------- -- ------ ------ -------- ------ -----
+ y   1000      26.32   16.92       0      12      24      36    87  
+
+ x   1000      5.09    2.87       0.03   2.57    5.36    7.51   10  
+--------------------------------------------------------------------
+
+Table: Synthtic Data : Summary Statistics
+
+"
+"0","ggplot(data=modelling_data) + geom_point(aes(x=x,y=y))"

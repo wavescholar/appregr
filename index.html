@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Demonstrates Regression Workflow and Diagnostics • appregr</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -92,6 +98,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#appregr" class="anchor"></a>appregr</h1></div>
 
+<p><a href="https://zenodo.org/badge/latestdoi/195104416"><img src="https://zenodo.org/badge/195104416.svg" alt="DOI"></a></p>
 <p><a href="https://codecov.io/gh/brucebcampbell/appregr"><img src="https://codecov.io/gh/brucebcampbell/appregr/branch/master/graph/badge.svg" alt="codecov"></a></p>
 <p><a href="https://travis-ci.com/brucebcampbell/appregr.svg?branch=master"><img src="https://travis-ci.com/brucebcampbell/appregr.svg?branch=master" alt="TravisCI"></a></p>
 <p><a href="https://pypi.python.org/pypi/ansicolortags/"><img src="https://img.shields.io/pypi/l/ansicolortags.svg" alt="PyPI license"></a></p>
@@ -108,6 +115,26 @@
 <p>This is a basic example which shows you how to get the leverage of a linear model:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">high.leverage &lt;-<span class="st"> </span>appregr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/appregr/topics/checkleverage">checkleverage</a></span>(lm.fit,df)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">pander</span>(high.leverage, <span class="dt">caption =</span> <span class="st">"High Leverage Data Elements"</span>)</a></code></pre></div>
+</div>
+<div id="devops-notes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#devops-notes" class="anchor"></a>Devops Notes</h2>
+<p>TravisCI has trouble building the rstan and rstanarm libraries. Also the vignettes for the Bayesian models take a long time to build which can couse a timeout with travis. For those reasons we’ve removed the gh-pages deploy of the documentation. This is the travis yaml that was redacted.</p>
+<pre><code>before_install:
+- Rscript -e 'install.packages(c("bayesm","lattice","lme4","lmtest","R2jags","bayesplot","caret","GGally","ggplot2","hexbin","latex2exp","papeR","parallel","rstan","rstanarm"," sandwich","sqldf","coda"),dependencies = TRUE)'
+
+after_success:
+- Rscript -e 'pkgdown::build_site()'
+
+deploy:
+provider: pages
+skip_cleanup: true
+github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+local_dir: "docs"
+keep_history: true
+on:
+  branch: master
+</code></pre>
 </div>
 </div>
   </div>
@@ -130,7 +157,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://zenodo.org/badge/latestdoi/195104416"><img src="https://zenodo.org/badge/195104416.svg" alt="DOI"></a></li>
+<li><a href="apple-touch-icon-120x120.png"><img src="apple-touch-icon-120x120.png" alt="logo"></a></li>
 </ul>
 </div>
 </div>
