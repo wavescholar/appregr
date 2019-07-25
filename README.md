@@ -32,7 +32,7 @@ pander(high.leverage, caption = "High Leverage Data Elements")
 
 ## Devops Notes
 
-TravisCI has trouble building the rstan and rstanarm libraries. Also the vignettes for the Bayesian models take a long time to build which can couse a timeout with travis. For those reasons we've removed the gh-pages deploy of the documentation.  This is the travis yaml that was redacted.
+TravisCI has trouble building the rstan and rstanarm libraries. Also the vignettes for the Bayesian models take a long time to build which can cause a timeout with travis. For those reasons we've removed the gh-pages deploy of the documentation.  This is the travis yaml that was redacted.
 
 ```
 before_install:
