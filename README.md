@@ -1,6 +1,6 @@
 # appregr
 
-[![logo](apple-touch-icon-120x120.png)](apple-touch-icon-120x120.png)
+[![logo](logo.png)](logo.png)
 
 [![DOI](https://zenodo.org/badge/195104416.svg)](https://zenodo.org/badge/latestdoi/195104416)
 

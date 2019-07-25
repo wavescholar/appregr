@@ -2,14 +2,10 @@
 title: " Heirarchical / Mixed Effects"
 author: "Bruce Campbell"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+output: rmarkdown::html
 fontsize: 12pt
 bibliography: CountsRegression.bibtex
-subtitle: 'Tutorial '
+subtitle: 'A tutorial on count regression '
 always_allow_html: yes
 ---
 
@@ -338,7 +334,10 @@ var_covar_matrix <- matrix(c(intercept_sd^2, intercept_slope_covariance, interce
 library("MASS") # Load MASS to sample from a multivariate normal
 effects <- mvrnorm(n = n_subjects, mu = mu_vector, Sigma = var_covar_matrix)
 ##round(effects, 2)
+```
 
+```{r}
+par(mar=c(1,1,1,1))
 par(mfrow = c(1, 2))
 hist(effects[, 1], col = "lightsteelblue1", border = "white", breaks = 10, freq = FALSE)
 lines(density(effects[, 1]), col = "lightsteelblue3", lwd = 2)
@@ -641,10 +640,9 @@ print(out$sd$covariance, dig = 2)
 
 print(out$mean$rho, dig = 2)
 print(out$sd$rho, dig = 2)
+```
 
-# Finally, we compare the prior and posterior distributions for the (derived) ranef distribution parameters:
-
-par(mfrow = c(3, 4))
+```{r}
 hist(out$sims.list$mu_int_prior, col = "lightsteelblue1", border = "white", breaks = 10, freq = FALSE, main = "mu_int_prior")
 lines(density(out$sims.list$mu_int_prior), col = "lightsteelblue3", lwd = 2)
 hist(out$sims.list$mu_int, col = "lightsteelblue1", border = "white", breaks = 10, freq = FALSE, main = "mu_int")
@@ -669,7 +667,6 @@ hist(out$sims.list$rho_int_slope_prior, col = "lightsteelblue1", border = "white
 lines(density(out$sims.list$rho_int_slope_prior), col = "lightsteelblue3", lwd = 2)
 hist(out$sims.list$rho_int_slope, col = "lightsteelblue1", border = "white", breaks = 10, freq = FALSE, main = "rho_int_slope")
 lines(density(out$sims.list$rho_int_slope), col = "lightsteelblue3", lwd = 2)
-par(mfrow = c(1, 1))
 ```
 
 ## Finally, we simulate data from a model with 3 correlated ranefs and then provide the R and JAGS analyses of this data
@@ -921,4 +918,3 @@ print(out$sd$rho, dig = 2)
 # TBD compare the prior and posterior distributions for the (derived) ranef distribution parameters:
 
 ```
-s

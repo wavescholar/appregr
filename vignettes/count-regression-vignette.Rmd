@@ -2,11 +2,7 @@
 title: "Count Regression"
 author: "Bruce Campbell"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  html_document:
-    df_print: paged
-  pdf_document:
-    keep_tex: yes
+output: rmarkdown::html
 fontsize: 12pt
 bibliography: CountsRegression.bibtex
 subtitle: 'A tutorial on count regression '
