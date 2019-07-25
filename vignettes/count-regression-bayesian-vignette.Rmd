@@ -1,12 +1,12 @@
 ---
-title: "Count Regression Part II - Bayesian Approches"
+title: "Count Regression Part II - Bayesian Approaches"
 author: "Bruce Campbell"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  pdf_document:
-    keep_tex: yes
-  html_document:
-    df_print: paged
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 fontsize: 12pt
 bibliography: CountsRegression.bibtex
 subtitle: 'A tutorial on count regression '
@@ -47,21 +47,21 @@ warmup = 200
 
 ##Bayesian Approaches to Count Regression
 
-Please see the intorduction to count regression post for a review of count models from the maximum likelihood point o f view. Here we look to replicate the some of same models from a Bayesian persepctive.  We also start our exploration of hierarchical models with an example of a hierarchical zero inflated model. Part III of this series will go more into mixed effects and hierarchical models.
+Please see the introduction to count regression post for a review of count models from the maximum likelihood point of view. Here we look to replicate some of the same models from a Bayesian perspective.  We also start our exploration of hierarchical models with an example of a hierarchical zero-inflated model. Part III of this series will go more into mixed effects and hierarchical models.
 
-We introduce plate notation here. This is a graphical depiction of the static and probablistic dependiencies in a Bayesian model.
+We introduce plate notation here. Plate notation is a graphical depiction of the static and probabilistic dependencies in a Bayesian model.
 The symbols for a visual representation of a graphical model are;
 a) Solid squares represent constant nodes, which specify fixed- valued variables.
-b) Stochastic nodes are represented by solid circles. These variables correspond to random variables and may depend on other variables.
+b) Solid circles represent stochastic nodes. These variables correspond to random variables and may depend on other variables.
 c) Deterministic nodes (dotted circles) indicate variables that are determined by a specific function applied to another variable. They can be thought of as variable transformations.
 d) Observed states are placed in clamped stochastic nodes, represented by gray-shaded circles.
 e) Replication over a set of variables is indicated by enclosing the replicated nodes in a plate (dashed rectangle)
 
 Below are examples of a basic linear model and a generative version of the linear model in plate notation.
 
-![](linear_model_plate_notation.jpg)
+![](linear_model_plate_notation.jpg height=256)
 
-![](generative_linear_model_plate_notation.jpg)
+![](generative_linear_model_plate_notation.jpg height= 256)
 \pagebreak
 
 ##Generate overdispersed synthetic data $y \sim \theta \;\; e^{\beta_0+\beta_1 x}$
@@ -238,10 +238,7 @@ mcmc_acf(draws, pars = c("beta[1]", "beta[2]"), lags = 10)
 
 ## Zero Inflated Models
 
-Heirarchical zero inflated gamma model. This a "hurdle" model, in which a bernoulli GLM produces zeros/nonzeros, and then a gamma GLM produces the nonzero values, using varying effects correlated with those in the bernoulli process.
-
-
-
+Here we fit a heirarchical zero-inflated gamma model in Stan. This a model in which a bernoulli GLM produces zeros/nonzeros, and then a gamma GLM produces the nonzero values, using varying effects correlated with those in the bernoulli process.
 
 ```{r}
 

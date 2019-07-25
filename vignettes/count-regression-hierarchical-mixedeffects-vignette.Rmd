@@ -2,11 +2,11 @@
 title: " Heirarchical / Mixed Effects"
 author: "Bruce Campbell"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  pdf_document:
-    keep_tex: yes
-  html_document:
-    df_print: paged
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 fontsize: 12pt
 bibliography: CountsRegression.bibtex
 subtitle: 'Tutorial '
@@ -33,13 +33,13 @@ library(ggplot2)
 library(GGally)
 ```
 
-# Linear Mixed Effects 
+# Linear Mixed Effects
 
 Mixed-effects or mixed models have covariates with both fixed and random effects. The values for at least one set of effects (intercepts and/or slopes) to come from a normal distribution.This is what the random-effects assumption means. A close examination of how such a dataset can be simulated will help us better understand how real datasets are estimated down using mixed models. Very few strategies can be more effective to understand this type of mixed model than the combination of simulating data sets and describing the models fitted.
 
-### Model Types 
-- random intercepts only 
-- independent random intercepts and slopes 
+### Model Types
+- random intercepts only
+- independent random intercepts and slopes
 - correlated random intercepts and slopes
 - modeling 2 correlated random effects with a scaled Inverse Wishart instead
 - general correlated random effects with a scaled Inverse Wishart

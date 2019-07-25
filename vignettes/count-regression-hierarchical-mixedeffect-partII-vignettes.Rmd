@@ -2,12 +2,11 @@
 title: "Count Regression Part III - Heirarchical / Mixed Effects"
 author: "Bruce Campbell"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  pdf_document:
-    keep_tex: yes
-  html_document:
-    df_print: paged
-fontsize: 12pt
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 bibliography: CountsRegression.bibtex
 subtitle: 'A tutorial on count regression '
 always_allow_html: yes
@@ -31,12 +30,12 @@ library(sqldf)
 library(hexbin)
 library(knitr)
 library(pander)
-library(latex2exp) 
+library(latex2exp)
 library(ggplot2)
 library(GGally)
 ```
 
-##Bayesian Approaches to Count Regression 
+##Bayesian Approaches to Count Regression
 
 Please see the intorduction to count regression post for a review of count models from the maximum likelihood point o f view. Part 2 looks at the Bayesian implementation of count models.  Here in Part III we look to understand heirarchical count models. Some discussion on the principles involved is warranted since the terminology can be confusing. There are Bayesian and frequentist approches to this - each with their own terminology.  
 
@@ -83,7 +82,7 @@ title(ylab = bquote(E(Y ~ l ~ x[ij], u[j])), main = "Effect of x for different r
 
 Clearly, on the scale of the original units, a 1 unit increase in x has different effects depending on the value of u, hence the conditionalness of the model. Population *average* effects can be obtained by integrating out the random effect or by fitting a marginal model such as using GEEs. Although the outcome is assumed to have a Poisson distribution, the random effect (in the above example, u) is typically assumed to have a Gaussian distribution.
 
-##Generate synthetic data $y_{ij} \sim  \;\; e^{\beta_0 + Z_i b + \beta_1 x_{ij}}$ 
+##Generate synthetic data $y_{ij} \sim  \;\; e^{\beta_0 + Z_i b + \beta_1 x_{ij}}$
 
 ```{r, echo=FALSE}
 library(rstan)
@@ -98,7 +97,7 @@ n <- 1000
 numberOfGroups <- 5
 groupSize <- n/numberOfGroups
 
-randomEffectLevels <- rnorm(numberOfGroups,0,1) 
+randomEffectLevels <- rnorm(numberOfGroups,0,1)
 
 randomEffects <- unlist(lapply(randomEffectLevels, function(x) rep(x,groupSize)))
 groupIdx <- unlist(lapply(1:numberOfGroups, function(x) rep(x,groupSize)))
@@ -262,10 +261,10 @@ if (require(ggplot2)) {
 # Load packages:
 library(caret)
 
-# Set seed to insure reproducability: 
+# Set seed to insure reproducability:
 set.seed(1)
 
-# Split randomly into training and testing: 
+# Split randomly into training and testing:
 training_indices = sample(size = round(dim(modelling_data)[1]/10), x = 1:dim(modelling_data)[1], replace = FALSE)
 modelling_data = modelling_data[training_indices, ]
 modelling_data_test = modelling_data[-training_indices, ]
@@ -287,4 +286,4 @@ confusion_matrix_two_predictors
 confusion_matrix_random_intercepts_model
 ```
 
-The simulated data are generated with 5 random intercepts and a shared slope for the log rate in a Poisson regression. On this simulated data, the random slopes performs slightly better on test data than the interacting predictors model. The random intercepts performs slightly better on test data than the two predictors model. 
+The simulated data are generated with 5 random intercepts and a shared slope for the log rate in a Poisson regression. On this simulated data, the random slopes performs slightly better on test data than the interacting predictors model. The random intercepts performs slightly better on test data than the two predictors model.
