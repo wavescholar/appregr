@@ -2,7 +2,7 @@
 title: "Count Regression Part II - Bayesian Approaches"
 author: "Bruce Campbell"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: rmarkdown::html
+output: html_document
 fontsize: 12pt
 bibliography: CountsRegression.bibtex
 subtitle: 'A tutorial on count regression '
