@@ -89,14 +89,14 @@ for(i in 1:length(predictors))
 
 #### Partial Regression Plots
 
-Partial regression plots - also referred to as aded variable plots - attempt to show the effect of adding a variable to a model that already has one or more independent variables. For univariate linear regression a plot of $x \sim y$ guves a good idea of the relationship between the predictor and the response. It's hard to visualize the individual predictor response relationship for more than one or two predictors. Partial regression plots attemnt to do this. 
+Partial regression plots - also referred to as added variable plots - attempt to show the effect of adding a variable to a model that already has one or more independent variables. For univariate linear regression, a plot of $x \sim y$ gives a good idea of the relationship between the predictor and the response. It's hard to visualize the individual predictor response relationship for more than one or two predictors. Partial regression plots attemnt to do this. 
 
 Let the full model be $y =\beta_0 + \beta_1 x_1 + \ldots \beta_n x_n + \epsilon$ Then to form the partial regression for $x_i$ we regress $y$ on all but $x_i$ and calculate the residuals $\epsilon_{y \sim x_{[j \neq i]}}$ we plot those against the residuals of $x_i \sim x_{[j \neq i]}$  $\epsilon_{x_i \sim x_{[j \neq i]}}$.
 
 There are some nice properties of $\epsilon_{y \sim x_{[j \neq i]}} \sim \epsilon_{x_i \sim x_{[j \neq i]}}$
 The least quares fit gives a line with intercept zero and slope equal to the coefficient $\beta_i$ and the residuals are the same as the residuals in the full modes. 
 
-We can see many different types of violations of linear model assumptions in the partial regession plot like high leverage points, non linearity, non constant variance, etc. 
+We can see many different types of violations of linear model assumptions in the partial regression plot like high leverage points, non-linearity, non-constant variance, etc. 
 
 ```{r}
 prr <- appregr::partialregression(lm.fit = lm.fit,df=df)

@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```{r setup, include=FALSE}
 rm(list = ls())
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(dev = 'pdf')
+knitr::opts_chunk$set(dev = 'png')
 knitr::opts_chunk$set(cache=TRUE)
 knitr::opts_chunk$set(tidy=TRUE)
 knitr::opts_chunk$set(prompt=FALSE)
