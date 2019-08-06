@@ -25,3 +25,9 @@ This is a basic example which shows you how to get the leverage of a linear mode
 high.leverage <- appregr::checkleverage(lm.fit,df)
 pander(high.leverage, caption = "High Leverage Data Elements")
 ```
+
+Check for outliers:
+
+```{r}
+resutls<- appregr::checkoutliers(lm.fit = lm.fit,df = df)
+```
