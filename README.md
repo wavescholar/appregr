@@ -14,10 +14,11 @@ This package is holds some regression vignettes and R functions for regression d
 
 ## Installation
 
-You can install the released version of appregr from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of appregr with:
 
 ``` r
-install.packages("appregr")
+install.packages("remotes")
+remotes::install_github("brucebcampbell/appregr")
 ```
 
 ## Example
