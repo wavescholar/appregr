@@ -10,7 +10,7 @@
 
 [![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
 
-This package is holds some regression vignettes and R functions for regression diagnostics.    
+This package contains some regression vignettes and R functions for regression diagnostics.    
 
 ## Installation
 
