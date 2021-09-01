@@ -14,10 +14,11 @@ This package contains some regression vignettes and R functions for regression d
 
 ## Installation
 
-You can install the released version of appregr from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of appregr with:
 
 ``` r
-install.packages("appregr")
+install.packages("remotes")
+remotes::install_github("brucebcampbell/appregr")
 ```
 
 ## Example
@@ -29,6 +30,12 @@ high.leverage <- appregr::checkleverage(lm.fit,df)
 pander(high.leverage, caption = "High Leverage Data Elements")
 ```
 
+Check for outliers:
+
+```{r}
+resutls<- appregr::checkoutliers(lm.fit = lm.fit,df = df)
+```
+=======
 
 ## Devops Notes
 
